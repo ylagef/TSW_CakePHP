@@ -51,6 +51,9 @@ $description = 'Areufree';
             <!-- Material icons -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             </link>
+
+            <link href="https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/css/bootstrap/zebra_datepicker.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/zebra_datepicker.min.js"></script>
         </meta>
     </head>
     <body>

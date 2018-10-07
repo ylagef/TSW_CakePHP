@@ -1,5 +1,5 @@
 <?=$this->
-Html->css('pollAdd')?>
+    Html->css('pollAdd')?>
 <!-- CENTRAL JUMBOTRON -->
 <div class="jumbotron jumbotron-fluid rounded">
     <div class="container">
@@ -10,7 +10,7 @@ Html->css('pollAdd')?>
             Primero, necesitamos algunos datos...
         </p>
         <?=$this->
-        Form->create($poll)?>
+Form->create($poll)?>
         <div class="input-group mb-3">
             <div class="form-group row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
@@ -26,7 +26,7 @@ Html->css('pollAdd')?>
                             </div>
                         </div>
                         <?=$this->
-                        Form->control('title', ["class" => "form-control", "placeholder" => "Motivo", "label" => false])?>
+Form->control('title', ["class" => "form-control", "placeholder" => "Motivo", "label" => false])?>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
@@ -42,7 +42,7 @@ Html->css('pollAdd')?>
                             </div>
                         </div>
                         <?=$this->
-                        Form->control('location', ["class" => "form-control", "placeholder" => "Ubicación", "label" => false])?>
+Form->control('location', ["class" => "form-control", "placeholder" => "Ubicación", "label" => false])?>
                     </div>
                 </div>
             </div>
@@ -53,14 +53,14 @@ Html->css('pollAdd')?>
         <div class="form-group row submit-button">
             <div class="col-sm-10">
                 <?=$this->
-                Form->button(__('Continuar'), ["class" => "btn btn-outline-secondary"]);?>
+Form->button(__('Continuar'), ["class" => "btn btn-outline-secondary"]);?>
             </div>
         </div>
-        <?=$this->
-        Form->end()?>
+        
+<?= $this->Form->hidden('author', ["value"=>($this->request->getSession()->read('Auth.User.idUser'))]);
+$this->Form->end();?>
     </div>
 </div>
-
 <!-- <?php
 /**
  * @var \App\View\AppView $this

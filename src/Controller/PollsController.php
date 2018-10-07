@@ -66,7 +66,7 @@ class PollsController extends AppController
             if ($this->Polls->save($poll)) {
                 $this->Flash->success(__('The poll has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Gaps','action' => 'add', $poll->id]);
             }
             $this->Flash->error(__('The poll could not be saved. Please, try again.'));
         }

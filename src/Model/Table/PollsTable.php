@@ -66,9 +66,7 @@ class PollsTable extends Table
 
         $validator
             ->scalar('url')
-            ->maxLength('url', 255)
-            ->requirePresence('url', 'create')
-            ->notEmpty('url');
+            ->maxLength('url', 255);
 
         return $validator;
     }
