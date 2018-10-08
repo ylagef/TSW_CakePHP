@@ -1,5 +1,5 @@
 <?= $this->Html->css('pollView') ?>
-
+<?= $participatedOnPoll=false;?>
 <!-- CENTRAL JUMBOTRON -->
 <div class="jumbotron jumbotron-fluid rounded">
     <div class="container">
@@ -51,6 +51,9 @@
                             $isAssignated=true;
                             $gapCount++;
                         }
+                        if($assignation['idUser']==$this->request->getSession()->read('Auth.User.idUser')){
+                          $participatedOnPoll=true;
+                      }
                     endforeach;
 
                     if($isAssignated){
@@ -78,9 +81,14 @@
         </table>
         <hr class="my-3">
         <div class="other-option-button text-center">
+          <?php if(!$participatedOnPoll){?>
           <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->idPoll],["class"=>"btn btn-outline-info"]) ?></a>
+          <?php }else{ ?>
           <a class="btn btn-outline-info" href="#" role="button">Modificar participación</a>
+          <?php } ?>
+          <?php if($this->request->getSession()->read('Auth.User.idUser')==$poll->idPoll){ ?>
           <a class="btn btn-outline-info" href="#" role="button">Editar encuesta</a>
+          <?php } ?>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ Html->css('pollView')?>
 <?=$this->
 Html->script('scripts')?>
 <!-- CENTRAL JUMBOTRON -->
+<?=$this->Form->create()?>
 <div class="jumbotron jumbotron-fluid rounded">
     <div class="container">
         <h1 class="display-4">
@@ -45,10 +46,10 @@ Html->script('scripts')?>
                         <th scope="col">
                         </th>
                         <?php foreach ($users as $user): ?>
-                        <th scope="col">
-                            <?=h($user->
-                            name)?>
-                        </th>
+                            <th scope="col">
+                                <?=h($user->
+                                name)?>
+                            </th>
                         <?php endforeach;?>
                         <th scope="col">
                             <?=$this->
@@ -57,70 +58,96 @@ Html->script('scripts')?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($gaps as $gap):
-    $gapCount = 0;
-    ?>
-                    <tr>
-                        <th scope="row">
-                            <?=h($gap->
-                            startDate)?>
-                            <br>
-                                <a>
-                                    <?=h($gap->
-                                    endDate)?>
-                                </a>
-                            </br>
-                        </th>
-                        <?php foreach ($users as $user):
-        $isAssigned = false;
-        ?>
-                        <td>
-                            <?php
-        foreach ($assignations as $assign):
-            if ($assign['idUser'] == $user->
-                            idUser && $assign['idGap'] == $gap->idGap) {
-                $isAssigned = true;
-                $gapCount++;
-            }
-        endforeach;
+                    <?php foreach ($gaps as $gap): ?>
+                        <tr>
+                            <th scope="row">
+                                <?=h($gap->
+                                startDate)?>
+                                <br>
+                                    <a>
+                                        <?=h($gap->
+                                        endDate)?>
+                                    </a>
+                                </br>
+                            </th>
+                            <?php foreach ($users as $user):
+                                $isAssigned = false;
+                                ?>
+                                <td>
+                                    <?php foreach ($assignations as $assign):
+                                        if ($assign['idUser'] == $user->
+                                                            idUser && $assign['idGap'] == $gap->idGap) {
+                                            $isAssigned = true;
+                                        }
+                                    endforeach;
 
-        if ($isAssigned) {
-            ?>
-                            <button class="btn btn-success btn-sm" disabled="" type="button">
-                                <?php
-        } else {
-            ?>
-                                <button class="btn btn-outline-success btn-sm" disabled="" type="button">
+                                    if ($isAssigned) {
+                                        ?>
+
+                                    <button class="btn btn-success btn-sm" disabled="" type="button">
                                     <?php
-        }
-        ?>
+                                    } else {
+                                    ?>
+                                        <button class="btn btn-outline-success btn-sm" disabled="" type="button">
+                                    <?php
+                                    }
+                                    ?>
+                                            <i class="material-icons">
+                                                done
+                                            </i>
+                                        </button>
+                                    </button>
+                                </td>
+                            <?php endforeach;?>
+                            <td>
+                                <button class="btn btn-outline-success btn-sm" onclick="toggle.call(this, <?=$this->request->getSession()->read('Auth.User.idUser')?>, <?=h($gap->idGap)?>)" type="button">
                                     <i class="material-icons">
                                         done
                                     </i>
                                 </button>
-                            </button>
-                        </td>
-                        <?php endforeach;?>
-                        <td>
-                            <button class="btn btn-outline-success btn-sm" onclick="toggleButton.call(this)" type="button">
-                                <i class="material-icons">
-                                    done
-                                </i>
-                            </button>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     <?php endforeach;?>
                 </tbody>
             </table>
+            
             <hr class="my-3">
-                <div class="col-sm-10 accept-button">
-                    <?=$this->
-                    Form->button(__('Enviar'), ["class" => "btn btn-outline-secondary"]);?>
-                </div>
-            </hr>
+
+            <?php 
+            $input=0;
+            foreach ($gaps as $gap): ?>
+                <input type="checkbox" id="G<?=h($gap->idGap)?>.<?=$this->request->getSession()->read('Auth.User.idUser')?>" name="<?=$input?>[idGap]" value="<?=h($gap->idGap)?>" hidden>
+                <input type="checkbox" id="U<?=h($gap->idGap)?>.<?=$this->request->getSession()->read('Auth.User.idUser')?>"name="<?=$input?>[idUser]" value="<?=$this->request->getSession()->read('Auth.User.idUser')?>" hidden>
+            <?php $input++; endforeach;?>
+
+            <div class="col-sm-10 accept-button">
+                <?=$this->
+                Form->button(__('Enviar'), ["class" => "btn btn-outline-secondary"]);?>
+            </div>
+            
         </div>
     </div>
 </div>
+<?=$this->Form->end()?>
+
+<script>
+function toggle(idUser, idGap) {
+    if ($(this)[0].classList.contains('btn-outline-success')) {
+        $(this).removeClass("btn-outline-success");
+        $(this).addClass("btn-success");
+        document.getElementById("G"+idGap+"."+idUser).checked = true;
+        document.getElementById("U"+idGap+"."+idUser).checked = true;
+        // console.log("Selected user: "+ idUser + " Gap: " + idGap);
+    } else {
+        $(this).addClass("btn-outline-success");
+        $(this).removeClass("btn-success");
+        document.getElementById("G"+idGap+"."+idUser).checked = false;
+        document.getElementById("U"+idGap+"."+idUser).checked = false;
+        // console.log("Unselected user: "+ idUser + " Gap: " + idGap);
+    }
+}
+</script>
+
 <!-- <?php
 /**
  * @var \App\View\AppView $this

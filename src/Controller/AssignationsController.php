@@ -57,25 +57,41 @@ class AssignationsController extends AppController
             $gaps = $this->Gaps->find()->where(['idPoll' => $id]); // Gaps of poll
         $this->set('gaps', $gaps);
 
+        
         $this->loadModel('Users');
-            $users = $this->Users->find(); // All users (change to just participators)
-        $this->set('users', $users);
-
         $this->loadModel('Assignations');
-            $pollGaps = $this->Gaps->find()->where(['idPoll' => $id])->select('idGap'); //Gaps id of poll
-            $assignations = $this->Assignations->find()->where(['idGap in' => $pollGaps]); // Assignated gaps of poll
+
+        $pollGaps1 = $this->Gaps->find()->where(['idPoll' => $id]); //Gaps id of poll
+        $assignations1 = $this->Assignations->find()->where(['idGap in' => $pollGaps1->select('idGap')]); // Assignated gaps of poll
+        $users = $this->Users->find()->where(['idUser in'=>$assignations1->select('idUser')]); // All users (change to just participators)
+        $this->set('users', $users->toArray());
+    
+        $pollGaps = $this->Gaps->find()->where(['idPoll' => $id])->select('idGap'); //Gaps id of poll
+        $assignations = $this->Assignations->find()->where(['idGap in' => $pollGaps]); // Assignated gaps of poll
         $this->set('assignations', $assignations->toArray());
 
         $assignation = $this->Assignations->newEntity();
+        
         if ($this->request->is('post')) {
-            $assignation = $this->Assignations->patchEntity($assignation, $this->request->getData());
-            if ($this->Assignations->save($assignation)) {
-                $this->Flash->success(__('The assignation has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            debug($this->request->getData());
+            $assignations = $this->Assignations->newEntities($this->request->getData());
+        
+            foreach ($assignations as $assignation){
+                if(!$this->Assignations->save($assignation)){
+                    $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+                }
             }
-            $this->Flash->error(__('The assignation could not be saved. Please, try again.'));
+
+            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $id]);
+            
+            // if ($this->Assignations->save($assignation)) {
+            //     $this->Flash->success(__('Asignación creada correctamente.'));
+
+            //     return $this->redirect(['action' => 'index']);
+            // }
+            // $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
         }
+
         $this->set(compact('assignation'));
     }
 
@@ -94,11 +110,11 @@ class AssignationsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $assignation = $this->Assignations->patchEntity($assignation, $this->request->getData());
             if ($this->Assignations->save($assignation)) {
-                $this->Flash->success(__('The assignation has been saved.'));
+                $this->Flash->success(__('Asignación editada correctamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The assignation could not be saved. Please, try again.'));
+            $this->Flash->error(__('La asignación no se pudo editar. Inténtalo otra vez.'));
         }
         $this->set(compact('assignation'));
     }
@@ -115,9 +131,9 @@ class AssignationsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $assignation = $this->Assignations->get($id);
         if ($this->Assignations->delete($assignation)) {
-            $this->Flash->success(__('The assignation has been deleted.'));
+            $this->Flash->success(__('Asignación eliminada correctamente.'));
         } else {
-            $this->Flash->error(__('The assignation could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La asignación no se pudo eliminar. Inténtalo otra vez.'));
         }
 
         return $this->redirect(['action' => 'index']);

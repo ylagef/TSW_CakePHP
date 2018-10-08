@@ -51,9 +51,11 @@ $description = 'Areufree';
             <!-- Material icons -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             </link>
+            
+            <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+            <script src="/webroot/js/bootstrap-material-datetimepicker.js"></script>
+        <link rel="stylesheet" href="/webroot/css/bootstrap-material-datetimepicker.css" />
 
-            <link href="https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/css/bootstrap/zebra_datepicker.min.css" rel="stylesheet">
-            <script src="https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/zebra_datepicker.min.js"></script>
         </meta>
     </head>
     <body>

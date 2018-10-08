@@ -52,11 +52,11 @@ class GapsController extends AppController
         if ($this->request->is('post')) {
             $gap = $this->Gaps->patchEntity($gap, $this->request->getData());
             if ($this->Gaps->save($gap)) {
-                $this->Flash->success(__('The gap has been saved.'));
+                $this->Flash->success(__('El hueco se ha creado correctamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The gap could not be saved. Please, try again.'));
+            $this->Flash->error(__('El hueco no se pudo crear. Inténtalo de nuevo.'));
         }
         $this->set(compact('gap'));
     }

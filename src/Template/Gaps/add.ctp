@@ -1,89 +1,129 @@
-
-    <?=$this->
-    Html->css('gapsAdd');
+<?=$this->
+Html->css('gapsAdd');
 ?>
-    <!-- CENTRAL JUMBOTRON -->
-    <div class="jumbotron jumbotron-fluid rounded">
-        <div class="container">
-            <h1 class="display-4">
-                Crea tu encuesta
-            </h1>
-            <p class="lead">
-                Ahora, dinos las fechas posibles
-            </p>
-            <form action="fill-poll.html">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text link-icon">
-                            <i class="material-icons">
-                                link
-                            </i>
-                        </span>
-                    </div>
-                    <input aria-describedby="basic-addon1" aria-label="Username" class="form-control poll-link" disabled="" placeholder="www.nuestrodominio.com/18265728r36281r193t67" type="text">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary " type="button">
-                                COPIAR
-                            </button>
-                        </div>
-                    </input>
-                </div>
-                <div class="table-responsive">
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                </th>
-                                <th scope="col">
-                                    Día
-                                </th>
-                                <th scope="col">
-                                    Hora incio
-                                </th>
-                                <th scope="col">
-                                    Hora fin
-                                </th>
-                                <th scope="col">
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    1
-                                </th>
-                                <td>
-                                    <input class="form-control" data-zdp_readonly_element="false" id="datepicker" type="text">
-                                    </input>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <hr class="my-3">
-                        <div class="other-option-button">
-                            <button class="btn btn-outline-success">
-                                Añadir otra opción
-                            </button>
-                        </div>
-                    </hr>
-                </div>
-                <div class="col-sm-10 accept-button">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        Finalizar
+<!-- CENTRAL JUMBOTRON -->
+<div class="jumbotron jumbotron-fluid rounded">
+    <div class="container">
+        <h1 class="display-4">
+            Crea tu encuesta
+        </h1>
+        <p class="lead">
+            Ahora, dinos las fechas posibles
+        </p>
+        <form action="fill-poll.html">
+            <div class="table-responsive">
+                <table class="table text-center" id="gapsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                            </th>
+                            <th scope="col">
+                                Día
+                            </th>
+                            <th scope="col">
+                                Hora incio
+                            </th>
+                            <th scope="col">
+                                Hora fin
+                            </th>
+                            <th scope="col">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                1
+                            </th>
+                            <td>
+                                <input class="form-control floating-label text-center" id="date" placeholder="Fecha" type="text">
+                            </td>
+                            <td>
+                                <input class="form-control floating-label text-center" id="startTime" placeholder="Hora inicio" type="text">
+                            </td>
+                            <td>
+                                <input class="form-control floating-label text-center" id="endTime" placeholder="Hora fin" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                2
+                            </th>
+                            <td>
+                                <input class="form-control floating-label text-center" id="date" placeholder="Fecha" type="text">
+                            </td>
+                            <td>
+                                <input class="form-control floating-label text-center" id="startTime" placeholder="Hora inicio" type="text">
+                            </td>
+                            <td>
+                                <input class="form-control floating-label text-center" id="endTime" placeholder="Hora fin" type="text">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr class="my-3">
+                <div class="other-option-button">
+                    <button class="btn btn-outline-success" onClick="addRow()" type="button">
+                        Añadir otra opción
                     </button>
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="col-sm-10 accept-button">
+                <button class="btn btn-outline-secondary" type="submit">
+                    Finalizar
+                </button>
+            </div>
+        </form>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
+</div>
+<script type="text/javascript">
+    var rows=[0];
 
-    // assuming the controls you want to attach the plugin to
-    // have the "datepicker" class set
-$('#datepicker').Zebra_DatePicker();
-});
-    </script>
-    <!-- <?php
+    $(document).ready(
+        function() {
+            $('#date').bootstrapMaterialDatePicker({
+                time: false,
+                clearButton: true,
+                minDate : new Date()
+            });
+
+            $('#startTime').bootstrapMaterialDatePicker({
+                date: false,
+                shortTime: false,
+                format: 'HH:mm'
+            });
+
+            $('#endTime').bootstrapMaterialDatePicker({
+                date: false,
+                shortTime: false,
+                format: 'HH:mm'
+            });
+        }
+    );
+
+    function addRow(){
+        rows.push(rows.length);
+        console.log(rows);
+
+        var x=document.getElementById('gapsTable').insertRow(1);
+        var c1=x.insertCell(0);
+        var c2=x.insertCell(1);
+        var c3=x.insertCell(2);
+        var c4=x.insertCell(3);
+        c1.innerHTML="1";
+        c2.innerHTML="<input class='form-control floating-label text-center' id='date' placeholder='Fecha' type='text'>";
+        c3.innerHTML="<input class='form-control floating-label text-center' id='startTime' placeholder='Hora inicio' type='text'>";
+        c4.innerHTML="<input class='form-control floating-label text-center' id='endTime' placeholder='Hora fin' type='text'>";
+    }
+
+    function deleteRow(id){
+        var index = rows.indexOf(id);
+        if (index > -1) {
+            rows.splice(index, 1);
+        }
+    }
+</script>
+<!-- <?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Gap $gap
@@ -109,4 +149,3 @@ echo $this->Form->control('endDate');
     <?=$this->Form->end()?>
 </div>
  -->
-</link>

@@ -44,12 +44,17 @@ class PollsController extends AppController
         $this->set('gaps', $gaps);
 
         $this->loadModel('Users');
-            $users = $this->Users->find(); // All users (change to just participators)
-        $this->set('users', $users);
-
         $this->loadModel('Assignations');
-            $pollGaps = $this->Gaps->find()->where(['idPoll' => $id])->select('idGap'); //Gaps id of poll
-            $assignations = $this->Assignations->find()->where(['idGap in' => $pollGaps]); // Assignated gaps of poll
+
+        $pollGaps1 = $this->Gaps->find()->where(['idPoll' => $id]); //Gaps id of poll
+        $assignations1 = $this->Assignations->find()->where(['idGap in' => $pollGaps1->select('idGap')]); // Assignated gaps of poll
+        // debug($assignations1->select('idUser')->toArray());
+        $users = $this->Users->find()->where(['idUser in'=>$assignations1->select('idUser')]); // All users (change to just participators)
+        // debug($users->toArray());
+        $this->set('users', $users->toArray());
+    
+        $pollGaps = $this->Gaps->find()->where(['idPoll' => $id])->select('idGap'); //Gaps id of poll
+        $assignations = $this->Assignations->find()->where(['idGap in' => $pollGaps]); // Assignated gaps of poll
         $this->set('assignations', $assignations->toArray());
     }
 
@@ -64,11 +69,11 @@ class PollsController extends AppController
         if ($this->request->is('post')) {
             $poll = $this->Polls->patchEntity($poll, $this->request->getData());
             if ($this->Polls->save($poll)) {
-                $this->Flash->success(__('The poll has been saved.'));
+                $this->Flash->success(__('Encuesta creada correctamente.'));
 
                 return $this->redirect(['controller'=>'Gaps','action' => 'add', $poll->id]);
             }
-            $this->Flash->error(__('The poll could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo crear la encuesta. Inténtalo otra vez.'));
         }
         $this->set(compact('poll'));
     }
