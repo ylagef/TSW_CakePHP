@@ -1,4 +1,103 @@
-<?php
+<?= $this->Html->css('pollView') ?>
+<?= $participatedOnPoll=false;?>
+
+<?= $this->Form->create($poll) ?>
+<!-- CENTRAL JUMBOTRON -->
+<div class="jumbotron jumbotron-fluid rounded">
+    <div class="container">
+        <h1 class="display-4">Editar la encuesta</h1>
+        <!-- <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?= h($poll->title) ?></p> -->
+        <div class="row">
+            <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?=$this->
+                Form->control('title', ["class" => "form-control", "value" => h($poll->title), "label" => false])?></p>
+        </div>
+        <!-- <p class="lead"><i class="material-icons lead-icon">place</i><?= h($poll->place) ?></p> -->
+        <div class="row">
+            <p class="lead"><i class="material-icons lead-icon">place</i><?=$this->
+                Form->control('place', ["class" => "form-control", "value" => h($poll->place), "label" => false])?></p>
+        </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text link-icon">
+            <i class="material-icons ">
+              link
+            </i>
+          </span>
+        </div>
+        <input type="text" class="form-control poll-link" placeholder="<?= h($poll->url) ?>"
+          aria-label="Username" aria-describedby="basic-addon1" disabled>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary " type="button">COPIAR</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <?php foreach ($users as $user): ?>
+                <th scope="col"><?= h($user->name) ?></th>
+              <?php endforeach; ?>
+              <th scope="col" class="font-weight-light">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($gaps as $gap): 
+            $gapCount=0;
+            ?>
+            
+            <tr>
+              <th scope="row"><?= h($gap->startDate) ?><br><a><?= h($gap->endDate) ?></a></th>
+              
+              <?php foreach ($users as $user): 
+                $isAssignated=false;
+                ?>
+                <td>
+                    <?php 
+                     foreach($assignations as $assignation):
+                        if($assignation['idUser']==$user->idUser && $assignation['idGap']==$gap->idGap){
+                            $isAssignated=true;
+                            $gapCount++;
+                        }
+                        if($assignation['idUser']==$this->request->getSession()->read('Auth.User.idUser')){
+                          $participatedOnPoll=true;
+                      }
+                    endforeach;
+
+                    if($isAssignated){
+                    ?>
+                        <button type="button" class="btn btn-success btn-sm btn-disabled" disabled>
+                    <?php
+                    }else{
+                    ?>
+                        <button type="button" class="btn btn-outline-success btn-sm btn-disabled" disabled>
+                    <?php
+                    }
+                    ?>
+                     <i class="material-icons">
+                    done
+                    </i>
+                </td>
+              <?php endforeach; ?>
+
+              <td>
+                <a class="font-weight-light"><?php echo $gapCount ?></a>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        <hr class="my-3">
+        <div class="other-option-button text-center">
+            <?= $this->Form->button(__('Editar encuesta'), ["class"=>"btn btn-outline-info"]) ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?= $this->Form->end() ?>
+
+<!-- <?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Poll $poll
@@ -29,4 +128,4 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div> -->

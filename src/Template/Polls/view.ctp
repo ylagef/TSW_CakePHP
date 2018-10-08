@@ -87,7 +87,7 @@
           <a class="btn btn-outline-info" href="#" role="button">Modificar participación</a>
           <?php } ?>
           <?php if($this->request->getSession()->read('Auth.User.idUser')==$poll->idPoll){ ?>
-          <a class="btn btn-outline-info" href="#" role="button">Editar encuesta</a>
+            <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->idPoll],["class"=>"btn btn-outline-info"]) ?></a>
           <?php } ?>
         </div>
       </div>
