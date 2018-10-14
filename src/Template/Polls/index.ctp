@@ -17,11 +17,11 @@
               </thead>
               <tbody>
               <?php foreach ($polls as $poll): ?>
-              <?php  if( $this->request->getSession()->read('Auth.User.idUser')==$poll->author){ ?>
+              <?php  if( $this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
                 <tr>
                   <th scope="row" class="font-weight-normal"><?= h($poll->title) ?></th>
                   <td>
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $poll->idPoll],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
                 </tr>
                 <?php } ?>
@@ -44,7 +44,7 @@
                 <tr>
                   <th scope="row" class="font-weight-normal"><?= h($poll->title) ?></th>
                   <td>
-                  <?= $this->Html->link(__('View'), ['action' => 'view', $poll->idPoll],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
+                  <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
                 </tr>
                 <?php endforeach; ?>
@@ -76,7 +76,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('idPoll') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('poll_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('place') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('author') ?></th>
@@ -87,15 +87,15 @@
         <tbody>
             <?php foreach ($polls as $poll): ?>
             <tr>
-                <td><?= $this->Number->format($poll->idPoll) ?></td>
+                <td><?= $this->Number->format($poll->poll_id) ?></td>
                 <td><?= h($poll->title) ?></td>
                 <td><?= h($poll->place) ?></td>
                 <td><?= $this->Number->format($poll->author) ?></td>
                 <td><?= h($poll->url) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $poll->idPoll]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $poll->idPoll]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $poll->idPoll], ['confirm' => __('Are you sure you want to delete # {0}?', $poll->idPoll)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $poll->poll_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $poll->poll_id], ['confirm' => __('Are you sure you want to delete # {0}?', $poll->poll_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

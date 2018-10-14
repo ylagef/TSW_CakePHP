@@ -140,9 +140,9 @@ Html->css('gapsAdd');
     <fieldset>
         <legend><?=__('Add Gap')?></legend>
         <?php
-echo $this->Form->control('idPoll');
-echo $this->Form->control('startDate');
-echo $this->Form->control('endDate');
+echo $this->Form->control('poll_id');
+echo $this->Form->control('start_date');
+echo $this->Form->control('end_date');
 ?>
     </fieldset>
     <?=$this->Form->button(__('Submit'))?>

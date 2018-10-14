@@ -32,8 +32,8 @@ class AssignationsTable extends Table
         parent::initialize($config);
 
         $this->setTable('assignations');
-        $this->setDisplayField('idGap');
-        $this->setPrimaryKey(['idGap', 'idUser']);
+        $this->setDisplayField('assignation_id');
+        $this->setPrimaryKey(['assignation_id']);
     }
 
     /**
@@ -45,12 +45,18 @@ class AssignationsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('idUser')
-            ->allowEmpty('idUser', 'create');
+            ->integer('assignation_id')
+            ->allowEmpty('assignation_id', 'create');
 
         $validator
-            ->integer('idGap')
-            ->allowEmpty('idGap', 'create');
+            ->integer('user_id')
+            ->requirePresence('user_id', 'create')
+            ->notEmpty('user_id');
+
+        $validator
+            ->integer('gap_id')
+            ->requirePresence('gap_id', 'create')
+            ->notEmpty('gap_id');
 
         return $validator;
     }

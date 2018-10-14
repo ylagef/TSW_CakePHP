@@ -17,7 +17,7 @@ class PollsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'idPoll' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'poll_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'title' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'place' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'author' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -26,8 +26,8 @@ class PollsFixture extends TestFixture
             'author' => ['type' => 'index', 'columns' => ['author'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['idPoll'], 'length' => []],
-            'polls_ibfk_1' => ['type' => 'foreign', 'columns' => ['author'], 'references' => ['users', 'idUser'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['poll_id'], 'length' => []],
+            'polls_ibfk_1' => ['type' => 'foreign', 'columns' => ['author'], 'references' => ['users', 'user_id'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -45,7 +45,7 @@ class PollsFixture extends TestFixture
     {
         $this->records = [
             [
-                'idPoll' => 1,
+                'poll_id' => 1,
                 'title' => 'Lorem ipsum dolor sit amet',
                 'place' => 'Lorem ipsum dolor sit amet',
                 'author' => 1,

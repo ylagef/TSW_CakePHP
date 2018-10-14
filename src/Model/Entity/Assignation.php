@@ -6,8 +6,8 @@ use Cake\ORM\Entity;
 /**
  * Assignation Entity
  *
- * @property int $idUser
- * @property int $idGap
+ * @property int $user_id
+ * @property int $gap_id
  */
 class Assignation extends Entity
 {
@@ -22,7 +22,6 @@ class Assignation extends Entity
      * @var array
      */
     protected $_accessible = [
-        'idGap' => true,
-        'idUser' => true
+        '*' => true
     ];
 }

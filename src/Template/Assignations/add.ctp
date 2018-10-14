@@ -62,11 +62,11 @@ Html->script('scripts')?>
                         <tr>
                             <th scope="row">
                                 <?=h($gap->
-                                startDate)?>
+                                start_date)?>
                                 <br>
                                     <a>
                                         <?=h($gap->
-                                        endDate)?>
+                                        end_date)?>
                                     </a>
                                 </br>
                             </th>
@@ -75,8 +75,8 @@ Html->script('scripts')?>
                                 ?>
                                 <td>
                                     <?php foreach ($assignations as $assign):
-                                        if ($assign['idUser'] == $user->
-                                                            idUser && $assign['idGap'] == $gap->idGap) {
+                                        if ($assign['user_id'] == $user->
+                                                            user_id && $assign['gap_id'] == $gap->gap_id) {
                                             $isAssigned = true;
                                         }
                                     endforeach;
@@ -100,7 +100,7 @@ Html->script('scripts')?>
                                 </td>
                             <?php endforeach;?>
                             <td>
-                                <button class="btn btn-outline-success btn-sm" onclick="toggle.call(this, <?=$this->request->getSession()->read('Auth.User.idUser')?>, <?=h($gap->idGap)?>)" type="button">
+                                <button class="btn btn-outline-success btn-sm" onclick="toggle.call(this, <?=$this->request->getSession()->read('Auth.User.user_id')?>, <?=h($gap->gap_id)?>)" type="button">
                                     <i class="material-icons">
                                         done
                                     </i>
@@ -116,8 +116,8 @@ Html->script('scripts')?>
             <?php 
             $input=0;
             foreach ($gaps as $gap): ?>
-                <input type="checkbox" id="G<?=h($gap->idGap)?>.<?=$this->request->getSession()->read('Auth.User.idUser')?>" name="<?=$input?>[idGap]" value="<?=h($gap->idGap)?>" hidden>
-                <input type="checkbox" id="U<?=h($gap->idGap)?>.<?=$this->request->getSession()->read('Auth.User.idUser')?>"name="<?=$input?>[idUser]" value="<?=$this->request->getSession()->read('Auth.User.idUser')?>" hidden>
+                <input type="checkbox" id="G<?=h($gap->gap_id)?>.<?=$this->request->getSession()->read('Auth.User.user_id')?>" name="<?=$input?>[gap_id]" value="<?=h($gap->gap_id)?>" hidden>
+                <input type="checkbox" id="U<?=h($gap->gap_id)?>.<?=$this->request->getSession()->read('Auth.User.user_id')?>"name="<?=$input?>[user_id]" value="<?=$this->request->getSession()->read('Auth.User.user_id')?>" hidden>
             <?php $input++; endforeach;?>
 
             <div class="col-sm-10 accept-button">
@@ -131,19 +131,19 @@ Html->script('scripts')?>
 <?=$this->Form->end()?>
 
 <script>
-function toggle(idUser, idGap) {
+function toggle(user_id, gap_id) {
     if ($(this)[0].classList.contains('btn-outline-success')) {
         $(this).removeClass("btn-outline-success");
         $(this).addClass("btn-success");
-        document.getElementById("G"+idGap+"."+idUser).checked = true;
-        document.getElementById("U"+idGap+"."+idUser).checked = true;
-        // console.log("Selected user: "+ idUser + " Gap: " + idGap);
+        document.getElementById("G"+gap_id+"."+user_id).checked = true;
+        document.getElementById("U"+gap_id+"."+user_id).checked = true;
+        // console.log("Selected user: "+ user_id + " Gap: " + gap_id);
     } else {
         $(this).addClass("btn-outline-success");
         $(this).removeClass("btn-success");
-        document.getElementById("G"+idGap+"."+idUser).checked = false;
-        document.getElementById("U"+idGap+"."+idUser).checked = false;
-        // console.log("Unselected user: "+ idUser + " Gap: " + idGap);
+        document.getElementById("G"+gap_id+"."+user_id).checked = false;
+        document.getElementById("U"+gap_id+"."+user_id).checked = false;
+        // console.log("Unselected user: "+ user_id + " Gap: " + gap_id);
     }
 }
 </script>

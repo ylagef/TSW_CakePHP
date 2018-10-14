@@ -17,15 +17,15 @@ class AssignationsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'idUser' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'idGap' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'user_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'gap_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'idUser' => ['type' => 'index', 'columns' => ['idUser'], 'length' => []],
+            'user_id' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['idGap', 'idUser'], 'length' => []],
-            'assignations_ibfk_1' => ['type' => 'foreign', 'columns' => ['idGap'], 'references' => ['gaps', 'idGap'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
-            'assignations_ibfk_2' => ['type' => 'foreign', 'columns' => ['idUser'], 'references' => ['users', 'idUser'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['gap_id', 'user_id'], 'length' => []],
+            'assignations_ibfk_1' => ['type' => 'foreign', 'columns' => ['gap_id'], 'references' => ['gaps', 'gap_id'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
+            'assignations_ibfk_2' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'user_id'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -43,8 +43,8 @@ class AssignationsFixture extends TestFixture
     {
         $this->records = [
             [
-                'idUser' => 1,
-                'idGap' => 1
+                'user_id' => 1,
+                'gap_id' => 1
             ],
         ];
         parent::init();

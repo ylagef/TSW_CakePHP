@@ -6,10 +6,10 @@ use Cake\ORM\Entity;
 /**
  * Gap Entity
  *
- * @property int $idGap
- * @property int $idPoll
- * @property \Cake\I18n\FrozenTime $startDate
- * @property \Cake\I18n\FrozenTime $endDate
+ * @property int $gap_id
+ * @property int $poll_id
+ * @property \Cake\I18n\FrozenTime $start_date
+ * @property \Cake\I18n\FrozenTime $end_date
  */
 class Gap extends Entity
 {
@@ -24,8 +24,8 @@ class Gap extends Entity
      * @var array
      */
     protected $_accessible = [
-        'idPoll' => true,
-        'startDate' => true,
-        'endDate' => true
+        'poll_id' => true,
+        'start_date' => true,
+        'end_date' => true
     ];
 }

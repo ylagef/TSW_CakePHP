@@ -17,16 +17,16 @@ class GapsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'idGap' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'idPoll' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'startDate' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'endDate' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'gap_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'poll_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'start_date' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'end_date' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'idPoll' => ['type' => 'index', 'columns' => ['idPoll'], 'length' => []],
+            'poll_id' => ['type' => 'index', 'columns' => ['poll_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['idGap'], 'length' => []],
-            'gaps_ibfk_1' => ['type' => 'foreign', 'columns' => ['idPoll'], 'references' => ['polls', 'idPoll'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['gap_id'], 'length' => []],
+            'gaps_ibfk_1' => ['type' => 'foreign', 'columns' => ['poll_id'], 'references' => ['polls', 'poll_id'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -44,10 +44,10 @@ class GapsFixture extends TestFixture
     {
         $this->records = [
             [
-                'idGap' => 1,
-                'idPoll' => 1,
-                'startDate' => '2018-10-05 12:33:12',
-                'endDate' => '2018-10-05 12:33:12'
+                'gap_id' => 1,
+                'poll_id' => 1,
+                'start_date' => '2018-10-05 12:33:12',
+                'end_date' => '2018-10-05 12:33:12'
             ],
         ];
         parent::init();

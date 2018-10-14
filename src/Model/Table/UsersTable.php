@@ -33,7 +33,7 @@ class UsersTable extends Table
 
         $this->setTable('users');
         $this->setDisplayField('name');
-        $this->setPrimaryKey('idUser');
+        $this->setPrimaryKey('user_id');
     }
 
     /**
@@ -45,8 +45,8 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('idUser')
-            ->allowEmpty('idUser', 'create');
+            ->integer('user_id')
+            ->allowEmpty('user_id', 'create');
 
         $validator
             ->scalar('username')

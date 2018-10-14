@@ -48,7 +48,7 @@
             ?>
             
             <tr>
-              <th scope="row"><?= h($gap->startDate) ?><br><a><?= h($gap->endDate) ?></a></th>
+              <th scope="row"><?= h($gap->start_date) ?><br><a><?= h($gap->end_date) ?></a></th>
               
               <?php foreach ($users as $user): 
                 $isAssignated=false;
@@ -56,11 +56,12 @@
                 <td>
                     <?php 
                      foreach($assignations as $assignation):
-                        if($assignation['idUser']==$user->idUser && $assignation['idGap']==$gap->idGap){
+                        if($assignation['user_id']==$user->user_id && $assignation['gap_id']==$gap->gap_id){
                             $isAssignated=true;
                             $gapCount++;
                         }
-                        if($assignation['idUser']==$this->request->getSession()->read('Auth.User.idUser')){
+                        
+                        if($assignation['user_id']==$this->request->getSession()->read('Auth.User.user_id')){
                           $participatedOnPoll=true;
                       }
                     endforeach;
@@ -108,8 +109,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $poll->idPoll],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $poll->idPoll)]
+                ['action' => 'delete', $poll->poll_id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $poll->poll_id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Polls'), ['action' => 'index']) ?></li>

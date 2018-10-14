@@ -57,7 +57,7 @@ Form->button(__('Continuar'), ["class" => "btn btn-outline-secondary"]);?>
             </div>
         </div>
         
-<?= $this->Form->hidden('author', ["value"=>($this->request->getSession()->read('Auth.User.idUser'))]);
+<?= $this->Form->hidden('author', ["value"=>($this->request->getSession()->read('Auth.User.user_id'))]);
 $this->Form->end();?>
     </div>
 </div>

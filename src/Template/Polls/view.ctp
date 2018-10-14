@@ -10,7 +10,7 @@
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text link-icon">
-            <i class="material-icons ">
+            <i class="material-icons">
               link
             </i>
           </span>
@@ -18,7 +18,7 @@
         <input type="text" class="form-control poll-link" placeholder="<?= h($poll->url) ?>"
           aria-label="Username" aria-describedby="basic-addon1" disabled>
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary " type="button">COPIAR</button>
+          <button class="btn btn-outline-secondary" type="button">COPIAR</button>
         </div>
       </div>
 
@@ -34,12 +34,15 @@
             </tr>
           </thead>
           <tbody>
-          <?php foreach ($gaps as $gap): 
-            $gapCount=0;
+          <?php 
+            $maxGapCount=0;
+            foreach ($gaps as $gap):
+              $gapCount=0;
             ?>
             
-            <tr>
-              <th scope="row"><?= h($gap->startDate) ?><br><a><?= h($gap->endDate) ?></a></th>
+            <tr id="TR<?php echo $gap['gap_id'] ?>">
+
+              <th scope="row"><?= h($gap->start_date) ?><br><a><?= h($gap->end_date) ?></a></th>
               
               <?php foreach ($users as $user): 
                 $isAssignated=false;
@@ -47,11 +50,12 @@
                 <td>
                     <?php 
                      foreach($assignations as $assignation):
-                        if($assignation['idUser']==$user->idUser && $assignation['idGap']==$gap->idGap){
+                        if($assignation['user_id']==$user->user_id && $assignation['gap_id']==$gap->gap_id){
                             $isAssignated=true;
                             $gapCount++;
                         }
-                        if($assignation['idUser']==$this->request->getSession()->read('Auth.User.idUser')){
+
+                        if($assignation['user_id']==$this->request->getSession()->read('Auth.User.user_id')){
                           $participatedOnPoll=true;
                       }
                     endforeach;
@@ -70,24 +74,37 @@
                     done
                     </i>
                 </td>
-              <?php endforeach; ?>
-
+              <?php endforeach; 
+              if($gapCount>$maxGapCount) {
+                $maxGapCount=$gapCount;
+              }
+              ?>
               <td>
-                <a class="font-weight-light"><?php echo $gapCount ?></a>
+                <a class="font-weight-light" id="count<?php echo $gap['gap_id'] ?>"><?php echo $gapCount?></a>
               </td>
             </tr>
             <?php endforeach; ?>
           </tbody>
         </table>
+
+        <script>
+        <?php foreach ($gaps as $gap):?>
+          if(document.getElementById("count<?php echo $gap['gap_id'] ?>").innerHTML=="<?php echo $maxGapCount?>"){
+            document.getElementById("TR<?php echo $gap['gap_id'] ?>").classList.add("table-success");
+          }
+        <?php endforeach; ?>
+        </script>
+
         <hr class="my-3">
+        
         <div class="other-option-button text-center">
           <?php if(!$participatedOnPoll){?>
-          <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->idPoll],["class"=>"btn btn-outline-info"]) ?></a>
+          <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
           <?php }else{ ?>
-          <a class="btn btn-outline-info" href="#" role="button">Modificar participación</a>
+            <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
           <?php } ?>
-          <?php if($this->request->getSession()->read('Auth.User.idUser')==$poll->idPoll){ ?>
-            <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->idPoll],["class"=>"btn btn-outline-info"]) ?></a>
+          <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->poll_id){ ?>
+            <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
           <?php } ?>
         </div>
       </div>
@@ -101,8 +118,8 @@
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Poll'), ['action' => 'edit', $poll->idPoll]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Poll'), ['action' => 'delete', $poll->idPoll], ['confirm' => __('Are you sure you want to delete # {0}?', $poll->idPoll)]) ?> </li>
+        <li><?= $this->Html->link(__('Edit Poll'), ['action' => 'edit', $poll->poll_id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Poll'), ['action' => 'delete', $poll->poll_id], ['confirm' => __('Are you sure you want to delete # {0}?', $poll->poll_id)]) ?> </li>
         <li><?= $this->Html->link(__('List Polls'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Poll'), ['action' => 'add']) ?> </li>
     </ul>
@@ -123,8 +140,8 @@
             <td><?= h($poll->url) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('IdPoll') ?></th>
-            <td><?= $this->Number->format($poll->idPoll) ?></td>
+            <th scope="row"><?= __('poll_id') ?></th>
+            <td><?= $this->Number->format($poll->poll_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Author') ?></th>

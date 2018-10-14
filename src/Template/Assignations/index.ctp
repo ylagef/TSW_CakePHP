@@ -15,20 +15,20 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('idUser') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('idGap') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('gap_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($assignations as $assignation): ?>
             <tr>
-                <td><?= $this->Number->format($assignation->idUser) ?></td>
-                <td><?= $this->Number->format($assignation->idGap) ?></td>
+                <td><?= $this->Number->format($assignation->user_id) ?></td>
+                <td><?= $this->Number->format($assignation->gap_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $assignation->idGap]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $assignation->idGap]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $assignation->idGap], ['confirm' => __('Are you sure you want to delete # {0}?', $assignation->idGap)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $assignation->gap_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $assignation->gap_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $assignation->gap_id], ['confirm' => __('Are you sure you want to delete # {0}?', $assignation->gap_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

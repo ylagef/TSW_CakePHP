@@ -33,7 +33,7 @@ class PollsTable extends Table
 
         $this->setTable('polls');
         $this->setDisplayField('title');
-        $this->setPrimaryKey('idPoll');
+        $this->setPrimaryKey('poll_id');
     }
 
     /**
@@ -45,8 +45,8 @@ class PollsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('idPoll')
-            ->allowEmpty('idPoll', 'create');
+            ->integer('poll_id')
+            ->allowEmpty('poll_id', 'create');
 
         $validator
             ->scalar('title')

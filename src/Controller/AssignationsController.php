@@ -49,25 +49,25 @@ class AssignationsController extends AppController
     public function add($id)
     {
         $this->loadModel('Polls');
-        $poll = $this->Polls->find()->where(['idPoll' => $id])->first(); // Gaps of poll
+        $poll = $this->Polls->find()->where(['poll_id' => $id])->first(); // Gaps of poll
         $this->set('poll', $poll);
 
 
         $this->loadModel('Gaps');
-            $gaps = $this->Gaps->find()->where(['idPoll' => $id]); // Gaps of poll
+            $gaps = $this->Gaps->find()->where(['poll_id' => $id]); // Gaps of poll
         $this->set('gaps', $gaps);
 
         
         $this->loadModel('Users');
         $this->loadModel('Assignations');
 
-        $pollGaps1 = $this->Gaps->find()->where(['idPoll' => $id]); //Gaps id of poll
-        $assignations1 = $this->Assignations->find()->where(['idGap in' => $pollGaps1->select('idGap')]); // Assignated gaps of poll
-        $users = $this->Users->find()->where(['idUser in'=>$assignations1->select('idUser')]); // All users (change to just participators)
+        $pollGaps1 = $this->Gaps->find()->where(['poll_id' => $id]); //Gaps id of poll
+        $assignations1 = $this->Assignations->find()->where(['gap_id in' => $pollGaps1->select('gap_id')]); // Assignated gaps of poll
+        $users = $this->Users->find()->where(['user_id in'=>$assignations1->select('user_id')]); // All users (change to just participators)
         $this->set('users', $users->toArray());
     
-        $pollGaps = $this->Gaps->find()->where(['idPoll' => $id])->select('idGap'); //Gaps id of poll
-        $assignations = $this->Assignations->find()->where(['idGap in' => $pollGaps]); // Assignated gaps of poll
+        $pollGaps = $this->Gaps->find()->where(['poll_id' => $id])->select('gap_id'); //Gaps id of poll
+        $assignations = $this->Assignations->find()->where(['gap_id in' => $pollGaps]); // Assignated gaps of poll
         $this->set('assignations', $assignations->toArray());
 
         $assignation = $this->Assignations->newEntity();
@@ -104,19 +104,75 @@ class AssignationsController extends AppController
      */
     public function edit($id = null)
     {
-        $assignation = $this->Assignations->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $assignation = $this->Assignations->patchEntity($assignation, $this->request->getData());
-            if ($this->Assignations->save($assignation)) {
-                $this->Flash->success(__('Asignación editada correctamente.'));
+        $this->loadModel('Polls');
+        $poll = $this->Polls->find()->where(['poll_id' => $id])->first(); // Gaps of poll
+        $this->set('poll', $poll);
 
-                return $this->redirect(['action' => 'index']);
+
+        $this->loadModel('Gaps');
+        $gaps = $this->Gaps->find()->where(['poll_id' => $id]); // Gaps of poll
+        $this->set('gaps', $gaps);
+
+        
+        $this->loadModel('Users');
+        $this->loadModel('Assignations');
+
+        $pollGaps1 = $this->Gaps->find()->where(['poll_id' => $id]); //Gaps id of poll
+        $assignations1 = $this->Assignations->find()->where(['gap_id in' => $pollGaps1->select('gap_id')]); // Assignated gaps of poll
+        $users = $this->Users->find()->where(['user_id in'=>$assignations1->select('user_id'),'user_id !='=>$this->Auth->user('user_id')]); // All users (change to just participators)
+        $this->set('users', $users->toArray());
+    
+        $pollGaps = $this->Gaps->find()->where(['poll_id' => $id])->select('gap_id'); //Gaps id of poll
+        $assignations = $this->Assignations->find()->where(['gap_id in' => $pollGaps]); // Assignated gaps of poll
+        $this->set('assignations', $assignations->toArray());
+
+        $assignation = $this->Assignations->newEntity();
+        
+        $deletePollGaps = $this->Gaps->find()->select('gap_id')->where(['poll_id' => $id]); //Gaps id of poll
+        $deleteAssignations = $this->Assignations->find()->where(['gap_id in' => $deletePollGaps]); // Assignated gaps of poll
+
+        if ($this->request->is('post')) {
+            $assignations = $this->Assignations->newEntities($this->request->getData());
+        
+            foreach($deleteAssignations as $delete){
+                if($delete["user_id"]==$this->Auth->user('user_id')){
+                    $assignationToDelete = $this->Assignations->get($delete["assignation_id"]);
+                    $this->Assignations->delete($assignationToDelete);
+                }
             }
-            $this->Flash->error(__('La asignación no se pudo editar. Inténtalo otra vez.'));
+
+            foreach ($assignations as $assignation){
+                if(!$this->Assignations->save($assignation)){
+                    $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+                }
+            }
+
+            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $id]);
+            
+            // if ($this->Assignations->save($assignation)) {
+            //     $this->Flash->success(__('Asignación creada correctamente.'));
+
+            //     return $this->redirect(['action' => 'index']);
+            // }
+            // $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
         }
+
         $this->set(compact('assignation'));
+    
+
+        // $assignation = $this->Assignations->get($id, [
+        //     'contain' => []
+        // ]);
+        // if ($this->request->is(['patch', 'post', 'put'])) {
+        //     $assignation = $this->Assignations->patchEntity($assignation, $this->request->getData());
+        //     if ($this->Assignations->save($assignation)) {
+        //         $this->Flash->success(__('Asignación editada correctamente.'));
+
+        //         return $this->redirect(['action' => 'index']);
+        //     }
+        //     $this->Flash->error(__('La asignación no se pudo editar. Inténtalo otra vez.'));
+        // }
+        // $this->set(compact('assignation'));
     }
 
     /**

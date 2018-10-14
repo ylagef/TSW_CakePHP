@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 /**
  * Poll Entity
  *
- * @property int $idPoll
+ * @property int $poll_id
  * @property string $title
  * @property string $place
  * @property int $author

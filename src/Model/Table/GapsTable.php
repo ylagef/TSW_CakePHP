@@ -32,8 +32,8 @@ class GapsTable extends Table
         parent::initialize($config);
 
         $this->setTable('gaps');
-        $this->setDisplayField('idGap');
-        $this->setPrimaryKey('idGap');
+        $this->setDisplayField('gap_id');
+        $this->setPrimaryKey('gap_id');
     }
 
     /**
@@ -45,23 +45,23 @@ class GapsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('idGap')
-            ->allowEmpty('idGap', 'create');
+            ->integer('gap_id')
+            ->allowEmpty('gap_id', 'create');
 
         $validator
-            ->integer('idPoll')
-            ->requirePresence('idPoll', 'create')
-            ->notEmpty('idPoll');
+            ->integer('poll_id')
+            ->requirePresence('poll_id', 'create')
+            ->notEmpty('poll_id');
 
         $validator
-            ->dateTime('startDate')
-            ->requirePresence('startDate', 'create')
-            ->notEmpty('startDate');
+            ->dateTime('start_date')
+            ->requirePresence('start_date', 'create')
+            ->notEmpty('start_date');
 
         $validator
-            ->dateTime('endDate')
-            ->requirePresence('endDate', 'create')
-            ->notEmpty('endDate');
+            ->dateTime('end_date')
+            ->requirePresence('end_date', 'create')
+            ->notEmpty('end_date');
 
         return $validator;
     }
