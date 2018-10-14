@@ -5,8 +5,17 @@
     <div class="container">
       <h1 class="display-4">Ver la encuesta</h1>
       <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?= h($poll->title) ?></p>
-      <p class="lead"><i class="material-icons lead-icon">place</i><?= h($poll->place) ?></p>
-
+      
+      <p class="lead"><?php
+          if($poll->place!=null){
+            echo "<i class='material-icons lead-icon'>place</i>";
+            echo h($poll->place);
+          } else {
+            echo "- Ubicación no especificada -";
+          } 
+        ?>
+      </p>
+      
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text link-icon">
@@ -26,7 +35,7 @@
         <table class="table text-center">
           <thead>
             <tr>
-              <th scope="col"></th>
+              <th scope="col">Huecos</th>
               <?php foreach ($users as $user): ?>
                 <th scope="col"><?= h($user->name) ?></th>
               <?php endforeach; ?>
