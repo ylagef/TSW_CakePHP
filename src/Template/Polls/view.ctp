@@ -107,24 +107,21 @@
 
         <hr class="my-3">
         
-        <div class="other-option-button text-center">
-          <?php if(!$participatedOnPoll){?>
-          <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
-          <?php }else{ ?>
-            <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
-          <?php } ?>
-          <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
-            <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
-          <?php } ?>
-        </div>
       </div>
     </div>
-  </div>
+
+    <div class="other-option-button text-center">
+      <?php if(!$participatedOnPoll){?>
+      <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
+      <?php }else{ ?>
+        <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
+      <?php } ?>
+      <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
+        <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
+      <?php } ?>
+    </div>
+</div>
   
-
-
-
-
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>

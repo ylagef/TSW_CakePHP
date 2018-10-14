@@ -36,7 +36,7 @@
                 </div>
 
                 <small id="help" class="form-text text-muted">- Los campos son obligatorios. -</small>
-                <small id="help" class="form-text font-weight-light"><a href="#">Olvidé mi contraseña</a></small>
+                <!-- <small id="help" class="form-text font-weight-light"><a href="#">Olvidé mi contraseña</a></small> -->
                 <small id="help" class="form-text font-weight-light"><a>
                         <?= $this->Html->link("Registrarme", array('controller' => 'Users','action'=> 'add'))?></a></small>
 

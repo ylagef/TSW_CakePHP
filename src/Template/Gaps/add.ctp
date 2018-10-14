@@ -16,8 +16,8 @@ Html->css('gapsAdd');
                 <table class="table text-center" id="gapsTable">
                     <thead>
                         <tr>
-                            <th scope="col">
-                            </th>
+                            <!-- <th scope="col">
+                            </th> -->
                             <th scope="col">
                                 Día
                             </th>
@@ -33,9 +33,9 @@ Html->css('gapsAdd');
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="font-weight-bold">
+                            <!-- <td class="font-weight-bold">
                                 0
-                            </td>
+                            </td> -->
                             <td>
                                 <input class="form-control floating-label text-center date" id="date0" placeholder="Fecha" type="text" onchange="loadDate(0)">
                             </td>
@@ -67,7 +67,7 @@ Html->css('gapsAdd');
 <?=$this->Form->end()?>
 
 <script type="text/javascript">
-    var rows=[1];
+    var rows=[0];
 
     $(document).ready(
         function() {
@@ -114,20 +114,20 @@ Html->css('gapsAdd');
     var rowNum=1;
     function addRow(){
         rows.push(rowNum);
-
+        console.log(rows);
         var x=document.getElementById('gapsTable').insertRow(rows.length);
+        // var c1=x.insertCell(0);
         var c1=x.insertCell(0);
         var c2=x.insertCell(1);
         var c3=x.insertCell(2);
         var c4=x.insertCell(3);
-        var c5=x.insertCell(4);
 
-        c1.innerHTML=rowNum;
-        c1.classList.add("font-weight-bold");
-        c2.innerHTML="<input class='form-control floating-label text-center date' id='date"+ rowNum +"' placeholder='Fecha' type='text' onChange='loadDate("+rowNum+")'>";
-        c3.innerHTML="<input class='form-control floating-label text-center startTime' id='startTime"+ rowNum +"' placeholder='Hora inicio' type='text' onChange='loadStartTime("+rowNum+")'>";
-        c4.innerHTML="<input class='form-control floating-label text-center endTime' id='endTime"+ rowNum +"' placeholder='Hora fin' type='text' onChange='loadEndTime("+rowNum+")'>";
-        c5.innerHTML="<td><button class='btn btn-outline-danger btn-sm' onClick='deleteRow("+ rowNum +")' type='button'><i class='material-icons'>delete</i></button></td>"
+        // c1.innerHTML=rowNum;
+        // c1.classList.add("font-weight-bold");
+        c1.innerHTML="<input class='form-control floating-label text-center date' id='date"+ rowNum +"' placeholder='Fecha' type='text' onChange='loadDate("+rowNum+")'>";
+        c2.innerHTML="<input class='form-control floating-label text-center startTime' id='startTime"+ rowNum +"' placeholder='Hora inicio' type='text' onChange='loadStartTime("+rowNum+")'>";
+        c3.innerHTML="<input class='form-control floating-label text-center endTime' id='endTime"+ rowNum +"' placeholder='Hora fin' type='text' onChange='loadEndTime("+rowNum+")'>";
+        c4.innerHTML="<td><button class='btn btn-outline-danger btn-sm' onClick='deleteRow("+ rowNum +")' type='button'><i class='material-icons'>delete</i></button></td>"
         
         datePicker(rowNum);
         rowNum++;        
@@ -135,7 +135,9 @@ Html->css('gapsAdd');
 
     function deleteRow(id){
         var index=rows.indexOf(id);
+        
         console.log("index "+index);
+
         if (index > -1) {
             rows.splice(index, 1);
         }
