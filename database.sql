@@ -55,8 +55,8 @@ INSERT INTO users(name, username, email, password) VALUES
 ("Iván Fernández", "ivanf", "ivan@gmail.com", "$2y$10$A3tAwSKvEw6Y64LrMI02vur7OKKOZVPi68afxi6FErams1E/sVL0y	"); /* Password=ivan*/
 
 INSERT INTO `polls` (`poll_id`, `title`, `place`, `author`,`url`) VALUES
-(1, 'Encuesta de birras', 'Graduado', 1,'www.encuestas.com/1'),
-(2, 'Encuesta de exámenes', 'ESEI', 2,'www.encuestas.com/2');
+(1, 'Encuesta de birras', 'Graduado', 1,'localhost/polls/view/33F426550092097FF39B31878124D4EC'),
+(2, 'Encuesta de exámenes', 'ESEI', 2,'localhost/polls/view/EC9C3919917A16B9660F00C942E69533');
 
 INSERT INTO `gaps` (`gap_id`, `poll_id`, `start_date`, `end_date`) VALUES
 (1, 1, '2018-10-06 09:35:00', '2018-10-06 10:35:00'),

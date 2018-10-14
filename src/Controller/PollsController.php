@@ -68,9 +68,9 @@ class PollsController extends AppController
         $poll = $this->Polls->newEntity();
         if ($this->request->is('post')) {
             $poll = $this->Polls->patchEntity($poll, $this->request->getData());
-            
+        
+            $poll->url="localhost/polls/view/".hash("md5", $poll->title);
            
-            
             if ($this->Polls->save($poll)) {
                 $this->Flash->success(__('Encuesta creada correctamente.'));
 
