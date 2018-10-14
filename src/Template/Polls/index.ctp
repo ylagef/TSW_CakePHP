@@ -19,7 +19,7 @@
               <?php foreach ($polls as $poll): ?>
               <?php  if( $this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
                 <tr>
-                  <th scope="row" class="font-weight-normal"><?= h($poll->title) ?></th>
+                <th scope="row" class="font-weight-normal"><?= h($poll->title) ?><a class="font-weight-light"><br><?= h($poll->place) ?></a></th>
                   <td>
                     <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
@@ -42,7 +42,7 @@
               <tbody>
               <?php foreach ($polls as $poll): ?>
                 <tr>
-                  <th scope="row" class="font-weight-normal"><?= h($poll->title) ?></th>
+                  <th scope="row" class="font-weight-normal"><?= h($poll->title) ?><a class="font-weight-light"><br><?= h($poll->place) ?></a></th>
                   <td>
                   <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
