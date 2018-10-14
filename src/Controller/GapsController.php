@@ -46,17 +46,21 @@ class GapsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($poll_id)
     {
+        $this->set('poll_id', $poll_id);
+
         $gap = $this->Gaps->newEntity();
         if ($this->request->is('post')) {
-            $gap = $this->Gaps->patchEntity($gap, $this->request->getData());
-            if ($this->Gaps->save($gap)) {
-                $this->Flash->success(__('El hueco se ha creado correctamente.'));
+            $gaps = $this->Gaps->newEntities($this->request->getData());
 
-                return $this->redirect(['action' => 'index']);
+            foreach($gaps as $gap){
+                if (!$this->Gaps->save($gap)) {
+                    $this->Flash->error(__('El hueco no se pudo crear. Inténtalo otra vez.'));
+                }
             }
-            $this->Flash->error(__('El hueco no se pudo crear. Inténtalo de nuevo.'));
+            
+            return $this->redirect(['controller'=>'polls', 'action' => 'view',$poll_id]);
         }
         $this->set(compact('gap'));
     }

@@ -25,8 +25,7 @@ Form->create($poll)?>
                                 </i>
                             </div>
                         </div>
-                        <?=$this->
-Form->control('title', ["class" => "form-control", "placeholder" => "Motivo", "label" => false])?>
+                        <?=$this->Form->control('title', ["class" => "form-control", "placeholder" => "Motivo", "label" => false])?>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
@@ -41,8 +40,7 @@ Form->control('title', ["class" => "form-control", "placeholder" => "Motivo", "l
                                 </i>
                             </div>
                         </div>
-                        <?=$this->
-Form->control('location', ["class" => "form-control", "placeholder" => "Ubicación", "label" => false])?>
+                        <?=$this->Form->control('location', ["class" => "form-control", "placeholder" => "Ubicación", "label" => false])?>
                     </div>
                 </div>
             </div>
@@ -52,8 +50,7 @@ Form->control('location', ["class" => "form-control", "placeholder" => "Ubicaci�
         </small>
         <div class="form-group row submit-button">
             <div class="col-sm-10">
-                <?=$this->
-Form->button(__('Continuar'), ["class" => "btn btn-outline-secondary"]);?>
+                <?=$this->Form->button(__('Continuar'), ["class" => "btn btn-outline-secondary"]);?>
             </div>
         </div>
         

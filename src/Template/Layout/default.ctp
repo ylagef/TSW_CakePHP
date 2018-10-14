@@ -77,9 +77,7 @@ $description = 'Areufree';
         <?php if ($this->
         request->getSession()->read('Auth.User')) {?>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary nav">
-            <a class="navbar-brand nav-title" href="#">
-                Are u free?
-            </a>
+            <?=$this->Html->link('Are u free?', ['controller' => 'Polls', 'action' => 'index'], ['class' => 'navbar-brand nav-title']);?>
             <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler " data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon">
                 </span>
@@ -113,9 +111,8 @@ $description = 'Areufree';
                         request->getSession()->read('Auth.User.name') ?>
                     </button>
                     <div aria-labelledby="btnGroupDrop1" class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">
-                            Config
-                        </a>
+                    <?=$this->
+                        Html->link('Profile', ['controller' => 'Users', 'action' => 'edit'], ['class' => 'dropdown-item']);?>
                         <?=$this->
                         Html->link('Logout', ['controller' => 'Users', 'action' => 'logout'], ['class' => 'dropdown-item']);?>
                     </div>

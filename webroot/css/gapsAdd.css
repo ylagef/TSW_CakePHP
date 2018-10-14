@@ -101,21 +101,26 @@ small {
   margin-right: auto;
 }
 
-#date{
+.date {
   width: 50%!important;
 }
 
-#startTime{
+.startTime {
   width: 40%!important;
 }
 
-#endTime{
+.endTime {
   width: 40%!important;
 }
 
-.table th{
+.table th {
   vertical-align: middle;
 }
+
+.material-icons {
+  vertical-align: middle;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 
 @media (min-width: 576px) {

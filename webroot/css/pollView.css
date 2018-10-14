@@ -49,6 +49,10 @@ small {
     float: right;
     margin-top: 1rem;
 }
+
+.editRow{
+    margin-left: 0px;
+}
 /* Small devices (landscape phones, 576px and up) */
 
 @media (min-width: 576px) {

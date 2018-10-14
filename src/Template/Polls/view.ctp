@@ -89,7 +89,8 @@
 
         <script>
         <?php foreach ($gaps as $gap):?>
-          if(document.getElementById("count<?php echo $gap['gap_id'] ?>").innerHTML=="<?php echo $maxGapCount?>"){
+          if(document.getElementById("count<?php echo $gap['gap_id'] ?>").innerHTML=="<?php echo $maxGapCount?>"
+          &&document.getElementById("count<?php echo $gap['gap_id'] ?>").innerHTML!="0"){
             document.getElementById("TR<?php echo $gap['gap_id'] ?>").classList.add("table-success");
           }
         <?php endforeach; ?>
@@ -103,7 +104,7 @@
           <?php }else{ ?>
             <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
           <?php } ?>
-          <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->poll_id){ ?>
+          <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
             <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
           <?php } ?>
         </div>

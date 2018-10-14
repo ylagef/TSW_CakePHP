@@ -73,7 +73,6 @@ class AssignationsController extends AppController
         $assignation = $this->Assignations->newEntity();
         
         if ($this->request->is('post')) {
-            debug($this->request->getData());
             $assignations = $this->Assignations->newEntities($this->request->getData());
         
             foreach ($assignations as $assignation){

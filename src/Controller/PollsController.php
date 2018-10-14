@@ -68,10 +68,13 @@ class PollsController extends AppController
         $poll = $this->Polls->newEntity();
         if ($this->request->is('post')) {
             $poll = $this->Polls->patchEntity($poll, $this->request->getData());
+            
+           
+            
             if ($this->Polls->save($poll)) {
                 $this->Flash->success(__('Encuesta creada correctamente.'));
 
-                return $this->redirect(['controller'=>'Gaps','action' => 'add', $poll->id]);
+                return $this->redirect(['controller'=>'Gaps','action' => 'add', $poll->poll_id]);
             }
             $this->Flash->error(__('No se pudo crear la encuesta. Inténtalo otra vez.'));
         }

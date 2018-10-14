@@ -41,9 +41,10 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
-        $user = $this->Users->get($id, [
+
+        $user = $this->Users->get($this->Auth->user('user_id'), [
             'contain' => []
         ]);
 
@@ -77,9 +78,9 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit()
     {
-        $user = $this->Users->get($id, [
+        $user = $this->Users->get($this->Auth->user('user_id'), [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -87,7 +88,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'polls']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }

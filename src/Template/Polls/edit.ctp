@@ -7,14 +7,14 @@
     <div class="container">
         <h1 class="display-4">Editar la encuesta</h1>
         <!-- <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?= h($poll->title) ?></p> -->
-        <div class="row">
+        <div class="row editRow">
             <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?=$this->
-                Form->control('title', ["class" => "form-control", "value" => h($poll->title), "label" => false])?></p>
+                Form->control('title', ["class" => "form-control", "value" => h($poll->title), "label" => false, "placeholder"=>"Título"])?></p>
         </div>
         <!-- <p class="lead"><i class="material-icons lead-icon">place</i><?= h($poll->place) ?></p> -->
-        <div class="row">
+        <div class="row editRow">
             <p class="lead"><i class="material-icons lead-icon">place</i><?=$this->
-                Form->control('place', ["class" => "form-control", "value" => h($poll->place), "label" => false])?></p>
+                Form->control('place', ["class" => "form-control", "value" => h($poll->place), "label" => false, "placeholder"=>"Ubicación"])?></p>
         </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -91,7 +91,7 @@
         </table>
         <hr class="my-3">
         <div class="other-option-button text-center">
-            <?= $this->Form->button(__('Editar encuesta'), ["class"=>"btn btn-outline-info"]) ?>
+            <?= $this->Form->button(__('Editar'), ["class"=>"btn btn-outline-info"]) ?>
         </div>
       </div>
     </div>
