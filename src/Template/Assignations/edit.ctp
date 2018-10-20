@@ -1,5 +1,5 @@
 <?=$this->
-Html->css('pollView')?>
+Html->css('assignationEdit')?>
 <?=$this->
 Html->script('scripts')?>
 <!-- CENTRAL JUMBOTRON -->
@@ -22,13 +22,15 @@ function loadValuesCheckboxes(gap_id, user_id){
             <?=h($poll->
             title)?>
         </p>
-        <p class="lead">
-            <i class="material-icons lead-icon">
-                place
-            </i>
-            <?=h($poll->
-            place)?>
-        </p>
+        <p class="lead"><?php
+          if($poll->place!=null){
+            echo "<i class='material-icons lead-icon'>place</i> ";
+            echo h($poll->place);
+          } else {
+            echo "- Ubicación no especificada -";
+          } 
+        ?>
+      </p>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text link-icon">
@@ -37,7 +39,7 @@ function loadValuesCheckboxes(gap_id, user_id){
                     </i>
                 </span>
             </div>
-            <input aria-describedby="basic-addon1" aria-label="Username" class="form-control poll-link" disabled="" placeholder="<?=h($poll->url)?>" type="text">
+            <input aria-describedby="basic-addon1" aria-label="Username" class="form-control poll-link" disabled="" placeholder="localhost/view/<?=h($poll->url)?>" type="text">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary " type="button">
                         COPIAR
@@ -73,14 +75,14 @@ function loadValuesCheckboxes(gap_id, user_id){
                     <?php foreach ($gaps as $gap): ?>
                         <tr>
                             <th scope="row">
+                                <p>
                                 <?=h($gap->
                                 start_date)?>
-                                <br>
-                                    <a>
-                                        <?=h($gap->
-                                        end_date)?>
-                                    </a>
-                                </br>
+                                </p>
+                                <p>
+                                    <?=h($gap->
+                                    end_date)?>
+                                </p>
                             </th>
                             <?php foreach ($users as $user):
                                 $isAssigned = false;
@@ -146,13 +148,14 @@ function loadValuesCheckboxes(gap_id, user_id){
             
             <hr class="my-3">
 
-            <div class="col-sm-10 accept-button">
-                <?=$this->
-                Form->button(__('Enviar'), ["class" => "btn btn-outline-secondary"]);?>
-            </div>
+            
             
         </div>
     </div>
+    <div class="col-sm-10 accept-button">
+                <?=$this->
+                Form->button(__('Editar'), ["class" => "btn btn-outline-secondary"]);?>
+            </div>
 </div>
 <?=$this->Form->end()?>
 

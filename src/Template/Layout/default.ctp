@@ -59,25 +59,12 @@ $description = 'Areufree';
         </meta>
     </head>
     <body>
-        <!-- <nav class="top-bar expanded" data-topbar role="navigation">
-            <ul class="title-area large-3 medium-4 columns">
-                <li class="name">
-                    <h1><a href=""><?=$this->fetch('title')?></a></h1>
-                </li>
-            </ul>
-            <div class="top-bar-section">
-                <ul class="right">
-                    <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                    <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-                </ul>
-            </div>
-        </nav> -->
-        
         <!-- NAVBAR -->
         <?php if ($this->
         request->getSession()->read('Auth.User')) {?>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary nav">
-            <?=$this->Html->link('Are u free?', ['controller' => 'Polls', 'action' => 'index'], ['class' => 'navbar-brand nav-title']);?>
+            <!-- <?=$this->Html->image('you-free-logo.png', ['url'=>['controller' => 'Polls', 'action' => 'index'],'class'=>'logo']);?> -->
+            <?=$this->Html->link('U | FREE?', ['controller' => 'Polls', 'action' => 'index'], ['class' => 'navbar-brand nav-title font-weight-bold']);?>
             <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler " data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon">
                 </span>
@@ -120,14 +107,8 @@ $description = 'Areufree';
             </div>
         </nav>
         <?php }?>
-        <?=$this->
-        Flash->render()?>
-        <!-- <div class="container clearfix"> -->
-        <?=$this->
-        fetch('content')?>
+        <?=$this->Flash->render()?>
+        <?=$this->fetch('content')?>
         <!-- Here is the content injected -->
-        <!-- </div> -->
-        <!-- <footer>
-        </footer> -->
     </body>
 </html>

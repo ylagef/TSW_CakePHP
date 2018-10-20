@@ -24,7 +24,7 @@
             </i>
           </span>
         </div>
-        <input type="text" class="form-control poll-link" placeholder="<?= h($poll->url) ?>"
+        <input type="text" class="form-control poll-link" placeholder="localhost/view/<?= h($poll->url) ?>"
           aria-label="Username" aria-describedby="basic-addon1" disabled>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button">COPIAR</button>
@@ -51,7 +51,7 @@
             
             <tr id="TR<?php echo $gap['gap_id'] ?>">
 
-              <th scope="row"><?= h($gap->start_date) ?><br><a><?= h($gap->end_date) ?></a></th>
+              <th scope="row"><p><?= h($gap->start_date) ?><p><p><?= h($gap->end_date) ?></p></th>
               
               <?php foreach ($users as $user): 
                 $isAssignated=false;

@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <small id="help" class="form-text text-muted">- Los campos son obligatorios. -</small>
+                <!-- <small id="help" class="form-text text-muted">- Los campos son obligatorios. -</small> -->
 
                 <div class="form-group row submit-button">
                     <div class="col-sm-12">

@@ -19,7 +19,7 @@
               <?php foreach ($polls as $poll): ?>
               <?php  if( $this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
                 <tr>
-                <th scope="row" class="font-weight-normal"><?= h($poll->title) ?><a class="font-weight-light"><br><?= h($poll->place) ?></a></th>
+                <th scope="row" class="font-weight-normal"><p><?= h($poll->title) ?></p><p class="font-weight-light"><?= h($poll->place) ?></p></th>
                   <td>
                     <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
@@ -36,13 +36,13 @@
             <table class="table text-center">
               <thead>
                 <tr>
-                  <th scope="col">Encuestas en las que participo (NO)</th>
+                  <th scope="col">Encuestas en las que participo</th>
                 </tr>
               </thead>
               <tbody>
               <?php foreach ($polls as $poll): ?>
                 <tr>
-                  <th scope="row" class="font-weight-normal"><?= h($poll->title) ?><a class="font-weight-light"><br><?= h($poll->place) ?></a></th>
+                  <th scope="row" class="font-weight-normal"><p><?= h($poll->title) ?></p><p class="font-weight-light"><?= h($poll->place) ?></p></th>
                   <td>
                   <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
