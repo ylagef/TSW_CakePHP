@@ -1,8 +1,8 @@
-<?=$this->Html->css('gapsAdd');?>
-
+<?=$this->Html->css('gapsAdd')?>
 
 <!-- CENTRAL JUMBOTRON -->
-<?=$this->Form->create($gap)?>
+<?=$this->Form->create($gap, array('onsubmit' => "return setArray(" . $poll_id . ");"));?>
+<script>var rows=[];</script>
     <div class="jumbotron jumbotron-fluid rounded">
         <div class="container">
             <h1 class="display-4">
@@ -32,14 +32,15 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input class="form-control floating-label text-center date" id="date0" placeholder="Fecha" type="text" onchange="loadDate(0,<?= $poll_id?>)">
+                                <input class="form-control floating-label text-center date" id="date0" placeholder="Fecha" type="text" >
                             </td>
                             <td>
-                                <input class="form-control floating-label text-center startTime" id="startTime0" placeholder="Hora inicio" type="text" onchange="loadStartTime(0)">
+                                <input class="form-control floating-label text-center startTime" id="startTime0" placeholder="Hora inicio" type="text">
                             </td>
                             <td>
-                                <input class="form-control floating-label text-center endTime" id="endTime0" placeholder="Hora fin" type="text" onchange="loadEndTime(0)">
+                                <input class="form-control floating-label text-center endTime" id="endTime0" placeholder="Hora fin" type="text">
                             </td>
+                            <script> rows.push(0);</script>
                         </tr>
                     </tbody>
                 </table>

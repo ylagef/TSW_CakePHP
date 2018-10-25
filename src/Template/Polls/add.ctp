@@ -9,8 +9,7 @@
         <p class="lead">
             Primero, necesitamos algunos datos...
         </p>
-        <?=$this->
-Form->create($poll)?>
+        <?=$this->Form->create($poll)?>
         <div class="input-group mb-3">
             <div class="form-group row">
                 <div class="col-xs-12 col-sm-12 col-md-6">

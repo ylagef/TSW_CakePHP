@@ -41,7 +41,7 @@ function loadValuesCheckboxes(gap_id, user_id){
             </div>
             <input aria-describedby="basic-addon1" aria-label="Username" class="form-control poll-link" disabled="" placeholder="localhost/view/<?=h($poll->url)?>" type="text">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary " type="button">
+                    <button class="btn btn-outline-secondary " type="button" onclick="copy()" id="copyButton">
                         COPIAR
                     </button>
                 </div>
@@ -160,49 +160,19 @@ function loadValuesCheckboxes(gap_id, user_id){
 <?=$this->Form->end()?>
 
 <script>
+    function toggle(user_id, gap_id) {
+        if ($(this)[0].classList.contains('btn-outline-success')) {
+            $(this).removeClass("btn-outline-success");
+            $(this).addClass("btn-success");
+            
+            document.getElementById("G"+gap_id+"."+user_id).checked = true;
+            document.getElementById("U"+gap_id+"."+user_id).checked = true;
+        } else {
+            $(this).addClass("btn-outline-success");
+            $(this).removeClass("btn-success");
 
-function toggle(user_id, gap_id) {
-    if ($(this)[0].classList.contains('btn-outline-success')) {
-        $(this).removeClass("btn-outline-success");
-        $(this).addClass("btn-success");
-        
-        document.getElementById("G"+gap_id+"."+user_id).checked = true;
-        document.getElementById("U"+gap_id+"."+user_id).checked = true;
-    } else {
-        $(this).addClass("btn-outline-success");
-        $(this).removeClass("btn-success");
-
-        document.getElementById("G"+gap_id+"."+user_id).checked = false;
-        document.getElementById("U"+gap_id+"."+user_id).checked = false;
+            document.getElementById("G"+gap_id+"."+user_id).checked = false;
+            document.getElementById("U"+gap_id+"."+user_id).checked = false;
+        }
     }
-}
 </script>
-
-<!-- <?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Assignation $assignation
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $assignation->gap_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $assignation->gap_id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Assignations'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="assignations form large-9 medium-8 columns content">
-    <?= $this->Form->create($assignation) ?>
-    <fieldset>
-        <legend><?= __('Edit Assignation') ?></legend>
-        <?php
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div> -->

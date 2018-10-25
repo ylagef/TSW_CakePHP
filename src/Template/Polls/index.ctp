@@ -21,7 +21,7 @@
                 <tr>
                 <th scope="row" class="font-weight-normal"><p><?= h($poll->title) ?></p><p class="font-weight-light"><?= h($poll->place) ?></p></th>
                   <td>
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $poll->url],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
                 </tr>
                 <?php } ?>
@@ -36,7 +36,7 @@
             <table class="table text-center">
               <thead>
                 <tr>
-                  <th scope="col">Encuestas en las que participo</th>
+                  <th scope="col">Encuestas en las que participo (NO!)</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +44,7 @@
                 <tr>
                   <th scope="row" class="font-weight-normal"><p><?= h($poll->title) ?></p><p class="font-weight-light"><?= h($poll->place) ?></p></th>
                   <td>
-                  <?= $this->Html->link(__('View'), ['action' => 'view', $poll->poll_id],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
+                  <?= $this->Html->link(__('View'), ['action' => 'view', $poll->url],['class'=>'btn btn-outline-info  btn-sm text-uppercase']) ?>
                   </td>
                 </tr>
                 <?php endforeach; ?>

@@ -46,11 +46,13 @@ class AssignationsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add($id)
+    public function add($url)
     {
         $this->loadModel('Polls');
-        $poll = $this->Polls->find()->where(['poll_id' => $id])->first(); // Gaps of poll
+        $poll = $this->Polls->find()->where(['url' => $url])->first();
         $this->set('poll', $poll);
+
+         $id=$poll->poll_id;
 
 
         $this->loadModel('Gaps');
@@ -81,14 +83,7 @@ class AssignationsController extends AppController
                 }
             }
 
-            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $id]);
-            
-            // if ($this->Assignations->save($assignation)) {
-            //     $this->Flash->success(__('Asignación creada correctamente.'));
-
-            //     return $this->redirect(['action' => 'index']);
-            // }
-            // $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $url]);
         }
 
         $this->set(compact('assignation'));
@@ -101,11 +96,13 @@ class AssignationsController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($url = null)
     {
         $this->loadModel('Polls');
-        $poll = $this->Polls->find()->where(['poll_id' => $id])->first(); // Gaps of poll
+        $poll = $this->Polls->find()->where(['url' => $url])->first();
         $this->set('poll', $poll);
+
+         $id=$poll->poll_id;
 
 
         $this->loadModel('Gaps');
@@ -136,7 +133,9 @@ class AssignationsController extends AppController
             foreach($deleteAssignations as $delete){
                 if($delete["user_id"]==$this->Auth->user('user_id')){
                     $assignationToDelete = $this->Assignations->get($delete["assignation_id"]);
-                    $this->Assignations->delete($assignationToDelete);
+                    if(!$this->Assignations->delete($assignationToDelete)){
+                        $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+                    }
                 }
             }
 
@@ -146,32 +145,10 @@ class AssignationsController extends AppController
                 }
             }
 
-            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $id]);
-            
-            // if ($this->Assignations->save($assignation)) {
-            //     $this->Flash->success(__('Asignación creada correctamente.'));
-
-            //     return $this->redirect(['action' => 'index']);
-            // }
-            // $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $poll->url]);
         }
 
         $this->set(compact('assignation'));
-    
-
-        // $assignation = $this->Assignations->get($id, [
-        //     'contain' => []
-        // ]);
-        // if ($this->request->is(['patch', 'post', 'put'])) {
-        //     $assignation = $this->Assignations->patchEntity($assignation, $this->request->getData());
-        //     if ($this->Assignations->save($assignation)) {
-        //         $this->Flash->success(__('Asignación editada correctamente.'));
-
-        //         return $this->redirect(['action' => 'index']);
-        //     }
-        //     $this->Flash->error(__('La asignación no se pudo editar. Inténtalo otra vez.'));
-        // }
-        // $this->set(compact('assignation'));
     }
 
     /**

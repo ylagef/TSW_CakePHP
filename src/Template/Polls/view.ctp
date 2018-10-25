@@ -24,10 +24,10 @@
             </i>
           </span>
         </div>
-        <input type="text" class="form-control poll-link" placeholder="localhost/view/<?= h($poll->url) ?>"
-          aria-label="Username" aria-describedby="basic-addon1" disabled>
+        <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>"
+          aria-label="Username" aria-describedby="basic-addon1" disabled id="copyValue">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button">COPIAR</button>
+          <button class="btn btn-outline-secondary" type="button" onclick="copy()">COPIAR</button>
         </div>
       </div>
 
@@ -112,47 +112,12 @@
 
     <div class="other-option-button text-center">
       <?php if(!$participatedOnPoll){?>
-      <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
+      <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
       <?php }else{ ?>
-        <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
+        <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
       <?php } ?>
       <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
-        <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->poll_id],["class"=>"btn btn-outline-info"]) ?></a>
+        <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
       <?php } ?>
     </div>
 </div>
-  
-<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Poll'), ['action' => 'edit', $poll->poll_id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Poll'), ['action' => 'delete', $poll->poll_id], ['confirm' => __('Are you sure you want to delete # {0}?', $poll->poll_id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Polls'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Poll'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="polls view large-9 medium-8 columns content">
-    <h3><?= h($poll->title) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Title') ?></th>
-            <td><?= h($poll->title) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Place') ?></th>
-            <td><?= h($poll->place) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Url') ?></th>
-            <td><?= h($poll->url) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('poll_id') ?></th>
-            <td><?= $this->Number->format($poll->poll_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Author') ?></th>
-            <td><?= $this->Number->format($poll->author) ?></td>
-        </tr>
-    </table>
-</div> -->

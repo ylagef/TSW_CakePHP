@@ -46,9 +46,11 @@ class GapsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add($poll_id)
+    public function add($url)
     {
-        $this->set('poll_id', $poll_id);
+        $this->loadModel('Polls');
+        $poll = $this->Polls->find()->where(['url' => $url])->first();
+        $this->set('poll_id', $poll->poll_id);
 
         $gap = $this->Gaps->newEntity();
         if ($this->request->is('post')) {
@@ -60,7 +62,7 @@ class GapsController extends AppController
                 }
             }
             
-            return $this->redirect(['controller'=>'polls', 'action' => 'view',$poll_id]);
+            return $this->redirect(['controller'=>'polls', 'action' => 'view', $poll->url]);
         }
         $this->set(compact('gap'));
     }

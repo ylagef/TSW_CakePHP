@@ -44,6 +44,7 @@ class AppController extends Controller
                 'role'=>'alert'
         ]
         );
+        
         $this->loadComponent('Auth', [
             'loginRedirect' => [
                 'controller' => 'Polls',

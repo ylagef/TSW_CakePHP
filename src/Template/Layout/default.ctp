@@ -36,6 +36,8 @@ $description = 'Areufree';
             <?=$this->
             Html->css('navbar')?>
             <?=$this->
+            Html->script('scripts')?>
+            <?=$this->
             fetch('meta')?>
             <?=$this->
             fetch('css')?>
