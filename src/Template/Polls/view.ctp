@@ -37,61 +37,68 @@
               <th scope="col"><?=__("Gaps")?></th>
               <?php foreach ($users as $user): ?>
                 <th scope="col"><?= h($user->name) ?></th>
-              <?php endforeach; ?>
+              <?php endforeach; 
+               if($gaps->first()!=null){
+              ?>
               <th scope="col" class="font-weight-light"><?=__("Total")?></th>
+               <?php } ?>
             </tr>
           </thead>
           <tbody>
           <?php 
             $maxGapCount=0;
-            foreach ($gaps as $gap):
-              $gapCount=0;
-            ?>
-            
-            <tr id="TR<?php echo $gap['gap_id'] ?>">
-
-              <th scope="row"><p><?= h($gap->start_date) ?><p><p><?= h($gap->end_date) ?></p></th>
+            if($gaps->first()!=null){
+              foreach ($gaps as $gap):
+                $gapCount=0;
+              ?>
               
-              <?php foreach ($users as $user): 
-                $isAssignated=false;
+              <tr id="TR<?php echo $gap['gap_id'] ?>">
+                <th scope="row"><p><?= h($gap->start_date) ?><p><p><?= h($gap->end_date) ?></p></th>
+                
+                <?php foreach ($users as $user): 
+                  $isAssignated=false;
+                  ?>
+                  <td>
+                      <?php 
+                      foreach($assignations as $assignation):
+                          if($assignation['user_id']==$user->user_id && $assignation['gap_id']==$gap->gap_id){
+                              $isAssignated=true;
+                              $gapCount++;
+                          }
+
+                          if($assignation['user_id']==$this->request->getSession()->read('Auth.User.user_id')){
+                            $participatedOnPoll=true;
+                        }
+                      endforeach;
+
+                      if($isAssignated){
+                      ?>
+                          <button type="button" class="btn btn-success btn-sm btn-disabled" disabled>
+                      <?php
+                      }else{
+                      ?>
+                          <button type="button" class="btn btn-outline-success btn-sm btn-disabled" disabled>
+                      <?php
+                      }
+                      ?>
+                      <i class="material-icons">
+                      done
+                      </i>
+                  </td>
+                <?php endforeach; 
+                if($gapCount>$maxGapCount) {
+                  $maxGapCount=$gapCount;
+                }
                 ?>
                 <td>
-                    <?php 
-                     foreach($assignations as $assignation):
-                        if($assignation['user_id']==$user->user_id && $assignation['gap_id']==$gap->gap_id){
-                            $isAssignated=true;
-                            $gapCount++;
-                        }
-
-                        if($assignation['user_id']==$this->request->getSession()->read('Auth.User.user_id')){
-                          $participatedOnPoll=true;
-                      }
-                    endforeach;
-
-                    if($isAssignated){
-                    ?>
-                        <button type="button" class="btn btn-success btn-sm btn-disabled" disabled>
-                    <?php
-                    }else{
-                    ?>
-                        <button type="button" class="btn btn-outline-success btn-sm btn-disabled" disabled>
-                    <?php
-                    }
-                    ?>
-                     <i class="material-icons">
-                    done
-                    </i>
+                  <a class="font-weight-light" id="count<?php echo $gap['gap_id'] ?>"><?php echo $gapCount?></a>
                 </td>
+              
               <?php endforeach; 
-              if($gapCount>$maxGapCount) {
-                $maxGapCount=$gapCount;
-              }
-              ?>
-              <td>
-                <a class="font-weight-light" id="count<?php echo $gap['gap_id'] ?>"><?php echo $gapCount?></a>
-              </td>
-            </tr>
-            <?php endforeach; ?>
+              } else {?>
+                <td><a class="lead"><?= __("Nobody has participated yet. Be the first!")?></a></td>
+              <?php  }?>
+              </tr>
           </tbody>
         </table>
 

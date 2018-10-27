@@ -52,6 +52,10 @@ class PollsController extends AppController
     public function view($url = null)
     {
          $poll = $this->Polls->find()->where(['url' => $url])->first();
+         if($poll==null){
+             $this->Flash->error(__('The required poll does not exist.'));
+             return $this->redirect(['controller'=>'Polls','action' => 'index']);
+         }
         $this->set('poll', $poll);
 
          $id=$poll->poll_id;

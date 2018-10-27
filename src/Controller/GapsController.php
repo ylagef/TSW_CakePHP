@@ -61,15 +61,27 @@ class GapsController extends AppController
 
         $gap = $this->Gaps->newEntity();
         if ($this->request->is('post')) {
+            $error=false;
             $gaps = $this->Gaps->newEntities($this->request->getData());
 
             foreach($gaps as $gap){
+                if($gap->end_date <= $gap->start_date){
+                    $error=true;
+                    break;
+                }
+                
                 if (!$this->Gaps->save($gap)) {
-                    $this->Flash->error(__('The gap could not be created. Please, try again.'));
+                    $error=true;
+                    break;
                 }
             }
-            
-            return $this->redirect(['controller'=>'polls', 'action' => 'view', $poll->url]);
+
+            if($error){
+                $this->Flash->error(__('The gap could not be saved. Please, try again.'));
+            }else{
+                $this->Flash->success(__('The gaps have been saved.'));
+                return $this->redirect(['controller'=>'polls', 'action' => 'view', $poll->url]);
+            }
         }
         $this->set(compact('gap'));
     }
