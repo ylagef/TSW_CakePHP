@@ -13,8 +13,7 @@ function loadValuesCheckboxes(gap_id, user_id){
 <div class="jumbotron jumbotron-fluid rounded">
     <div class="container">
         <h1 class="display-4">
-            Editar participación
-        </h1>
+        <?=__("Edit participation")?>        </h1>
         <p class="lead">
             <i class="material-icons lead-icon">
                 keyboard_arrow_right
@@ -27,7 +26,7 @@ function loadValuesCheckboxes(gap_id, user_id){
             echo "<i class='material-icons lead-icon'>place</i> ";
             echo h($poll->place);
           } else {
-            echo "- Ubicación no especificada -";
+            echo __("Location not specified");
           } 
         ?>
       </p>
@@ -39,11 +38,9 @@ function loadValuesCheckboxes(gap_id, user_id){
                     </i>
                 </span>
             </div>
-            <input aria-describedby="basic-addon1" aria-label="Username" class="form-control poll-link" disabled="" placeholder="localhost/view/<?=h($poll->url)?>" type="text">
+            <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>" disabled id="copyValue">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary " type="button" onclick="copy()" id="copyButton">
-                        COPIAR
-                    </button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copy()"><?=__("COPY")?></button>
                 </div>
             </input>
         </div>
@@ -154,7 +151,7 @@ function loadValuesCheckboxes(gap_id, user_id){
     </div>
     <div class="col-sm-10 accept-button">
                 <?=$this->
-                Form->button(__('Editar'), ["class" => "btn btn-outline-secondary"]);?>
+                Form->button(__('Edit'), ["class" => "btn btn-outline-secondary"]);?>
             </div>
 </div>
 <?=$this->Form->end()?>

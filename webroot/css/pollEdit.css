@@ -2,15 +2,15 @@ small {
     margin-bottom: 1rem;
 }
 
-p{
+p {
     margin-bottom: 0px;
 }
 
-input{
+input {
     background-color: white!important;
 }
 
-.lead{
+.lead {
     margin-bottom: 1rem;
 }
 
@@ -90,6 +90,11 @@ input{
 
 .edit-disabled {
     background-color: white;
+}
+
+input {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .date {

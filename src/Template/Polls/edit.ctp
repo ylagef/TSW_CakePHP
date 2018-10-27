@@ -6,7 +6,7 @@
 <script>var rows=[];</script>
 <div class="jumbotron jumbotron-fluid rounded">
   <div class="container">
-    <h1 class="display-4">Editar la encuesta</h1>
+    <h1 class="display-4"><?=__("Edit poll")?></h1>
     <!-- <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?= h($poll->title) ?></p> -->
     <div class="row editRow">
       <p class="lead"><i class="material-icons lead-icon edit-icons">keyboard_arrow_right</i>
@@ -28,10 +28,9 @@
           </i>
         </span>
       </div>
-      <input type="text" class="form-control poll-link" placeholder="<?= h($poll->url) ?>" aria-label="Username"
-        aria-describedby="basic-addon1" disabled>
+      <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>" disabled id="copyValue">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary " type="button" onclick="copy()" id="copyButton">COPIAR</button>
+        <button class="btn btn-outline-secondary " type="button" onclick="copy()" id="copyButton"><?=__("COPY")?></button>
       </div>
     </div>
 
@@ -41,13 +40,13 @@
         <thead>
           <tr>
             <th scope="col">
-              Día
+              <?=__("Day")?>
             </th>
             <th scope="col">
-              Hora incio
+              <?=__("Start Hour")?>
             </th>
             <th scope="col">
-              Hora fin
+              <?=__("End Hour")?>
             </th>
             <th scope="col">
             </th>
@@ -61,19 +60,19 @@
 
             <tr>
               <td>
-                <input class="form-control floating-label text-center date edit-disabled" id="date<?=$gap->gap_id?>" placeholder="Fecha" type="text"
+                <input class="form-control floating-label text-center date edit-disabled" id="date<?=$gap->gap_id?>" placeholder="<?=__("Date")?>" type="text"
                   value="<?php 
                   $date=explode(', ', $gap->start_date)[0];
                   $month=explode('/', $date)[0];
                   $day=explode('/', $date)[1];
-                  $year="20".explode('/', $date)[2];
+                  $year=explode('/', $date)[2];
 
                   echo $year."-".$month."-".$day;
                   
                   ?>" disabled>
               </td>
               <td>
-                <input class="form-control floating-label text-center startTime edit-disabled" id="startTime<?=$gap->gap_id?>" placeholder="Hora inicio"
+                <input class="form-control floating-label text-center startTime edit-disabled" id="startTime<?=$gap->gap_id?>" placeholder="<?=__("Start Hour")?>"
                   type="text"  value="<?php
                    $time=explode(', ', $gap->start_date)[1];
                    $aux=explode(' ',$time)[0];
@@ -86,7 +85,7 @@
                    ?>" disabled>
               </td>
               <td>
-                <input class="form-control floating-label text-center endTime edit-disabled" id="endTime<?=$gap->gap_id?>" placeholder="Hora fin" type="text"
+                <input class="form-control floating-label text-center endTime edit-disabled" id="endTime<?=$gap->gap_id?>" placeholder="<?=__("End Hour")?>" type="text"
                   value="<?php
                    $time=explode(', ', $gap->end_date)[1];
                    $aux=explode(' ',$time)[0];
@@ -108,12 +107,12 @@
       
       <div class="add-option-button">
         <button class="btn btn-outline-success" onClick="addRow()" type="button">
-          Añadir otra opción
+          <?=__("Add other option")?>
         </button>
       </div>
       <hr class="my-3">
       <div class="other-option-button text-center">
-        <?= $this->Form->button(__('Editar'), ["class"=>"btn btn-outline-info"]) ?>
+        <?= $this->Form->button(__('Edit'), ["class"=>"btn btn-outline-info"]) ?>
       </div>
     </div>
   </div>

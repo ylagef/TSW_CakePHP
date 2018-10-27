@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use Cake\Event\Event;
 use App\Controller\AppController;
+use Cake\I18n\I18n;
 
 /**
  * Polls Controller
@@ -12,6 +14,11 @@ use App\Controller\AppController;
  */
 class PollsController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        I18n::setLocale($this->request->getCookie('lang'));
+        parent::beforeFilter($event);
+    }
 
     /**
      * Index method
@@ -20,7 +27,17 @@ class PollsController extends AppController
      */
     public function index()
     {
-        $polls = $this->paginate($this->Polls);
+        $this->loadModel('Assignations');
+        $this->loadModel('Gaps');
+        $user_id=$this->Auth->user('user_id');
+
+        $createdPolls = $this->Polls->find()->where(["author"=>$user_id]);
+        $this->set('createdPolls', $createdPolls);
+
+        $gaps=$this->Assignations->find()->where(["user_id"=>$user_id])->select("gap_id");
+        $polls=$this->Gaps->find()->where(["gap_id in"=>$gaps])->select("poll_id");
+        $participatingPolls=$this->Polls->find()->where(["poll_id in"=>$polls]);
+        $this->set('participatingPolls', $participatingPolls);
 
         $this->set(compact('polls'));
     }
@@ -71,11 +88,11 @@ class PollsController extends AppController
             $poll->url=hash("md5", ($poll->title."hash difficult text"));
            
             if ($this->Polls->save($poll)) {
-                $this->Flash->success(__('Encuesta creada correctamente.'));
+                $this->Flash->success(__('The poll has been saved.'));
 
                 return $this->redirect(['controller'=>'Gaps','action' => 'add', $poll->url]);
             }
-            $this->Flash->error(__('No se pudo crear la encuesta. Inténtalo otra vez.'));
+                $this->Flash->error(__('The poll could not be created. Please, try again.'));
         }
         $this->set(compact('poll'));
     }

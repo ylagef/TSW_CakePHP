@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use Cake\Event\Event;
 use App\Controller\AppController;
+use Cake\I18n\I18n;
 
 /**
  * Gaps Controller
@@ -12,6 +14,11 @@ use App\Controller\AppController;
  */
 class GapsController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        I18n::setLocale($this->request->getCookie('lang'));
+        parent::beforeFilter($event);
+    }
 
     /**
      * Index method
@@ -58,7 +65,7 @@ class GapsController extends AppController
 
             foreach($gaps as $gap){
                 if (!$this->Gaps->save($gap)) {
-                    $this->Flash->error(__('El hueco no se pudo crear. Inténtalo otra vez.'));
+                    $this->Flash->error(__('The gap could not be created. Please, try again.'));
                 }
             }
             

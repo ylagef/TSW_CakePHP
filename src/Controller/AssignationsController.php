@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use Cake\Event\Event;
 use App\Controller\AppController;
+use Cake\I18n\I18n;
 
 /**
  * Assignations Controller
@@ -12,6 +14,11 @@ use App\Controller\AppController;
  */
 class AssignationsController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        I18n::setLocale($this->request->getCookie('lang'));
+    }
 
     /**
      * Index method
@@ -79,7 +86,7 @@ class AssignationsController extends AppController
         
             foreach ($assignations as $assignation){
                 if(!$this->Assignations->save($assignation)){
-                    $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+                    $this->Flash->error(__('Assignation could not be created. Please, try again.'));
                 }
             }
 
@@ -134,14 +141,14 @@ class AssignationsController extends AppController
                 if($delete["user_id"]==$this->Auth->user('user_id')){
                     $assignationToDelete = $this->Assignations->get($delete["assignation_id"]);
                     if(!$this->Assignations->delete($assignationToDelete)){
-                        $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+                        $this->Flash->error(__('Assignation could not be created. Please, try again.'));
                     }
                 }
             }
 
             foreach ($assignations as $assignation){
                 if(!$this->Assignations->save($assignation)){
-                    $this->Flash->error(__('La asignación no se pudo crear. Inténtalo otra vez.'));
+                        $this->Flash->error(__('Assignation could not be created. Please, try again.'));
                 }
             }
 
@@ -163,9 +170,9 @@ class AssignationsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $assignation = $this->Assignations->get($id);
         if ($this->Assignations->delete($assignation)) {
-            $this->Flash->success(__('Asignación eliminada correctamente.'));
+            $this->Flash->success(__('Assignation has been deleted.'));
         } else {
-            $this->Flash->error(__('La asignación no se pudo eliminar. Inténtalo otra vez.'));
+            $this->Flash->error(__('Assignation could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

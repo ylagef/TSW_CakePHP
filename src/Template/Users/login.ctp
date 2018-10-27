@@ -3,8 +3,8 @@
     <div class="row h-100 justify-content-center align-items-center">
         <div class="jumbotron jumbotron-fluid rounded">
             <div class="container">
-                <h1 class="display-4">Loguéate!</h1>
-                <p class="lead">Solo necesitamos dos cosas</p>
+                <h1 class="display-4"><?= __("Log you in!")?></h1>
+                <p class="lead"><?=__('We just need two things')?></p>
                 <hr class="my-4">
 
                 <?= $this->Flash->render('auth') ?>
@@ -20,7 +20,7 @@
                                 </i>
                             </div>
                         </div>
-                        <?= $this->Form->control('username',["class"=>"form-control","placeholder"=>"Usuario","label"=>false]) ?>
+                        <?= $this->Form->control('username',["class"=>"form-control","placeholder"=>__("Username"),"label"=>false]) ?>
                     </div>
 
                     <div class="input-group passwd">
@@ -31,14 +31,14 @@
                                 </i>
                             </div>
                         </div>
-                        <?= $this->Form->control('password',["class"=>"form-control","placeholder"=>"Contraseña","label"=>false]) ?>
+                        <?= $this->Form->control('password',["class"=>"form-control","placeholder"=>__("Password"),"label"=>false]) ?>
                     </div>
                 </div>
 
-                <small id="help" class="form-text text-muted">- Los campos son obligatorios. -</small>
+                <small id="help" class="form-text text-muted">- <?=__('Fields are mandatory')?> -</small>
                 <!-- <small id="help" class="form-text font-weight-light"><a href="#">Olvidé mi contraseña</a></small> -->
                 <small id="help" class="form-text font-weight-light"><a>
-                        <?= $this->Html->link("Registrarme", array('controller' => 'Users','action'=> 'add'))?></a></small>
+                        <?= $this->Html->link(__("Sign up"), array('controller' => 'Users','action'=> 'add'))?></a></small>
 
                 <div class="form-group row submit-button">
                     <div class="col-sm-12">

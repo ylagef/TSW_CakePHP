@@ -62,8 +62,7 @@ $description = 'Areufree';
     </head>
     <body>
         <!-- NAVBAR -->
-        <?php if ($this->
-        request->getSession()->read('Auth.User')) {?>
+        <?php if($this->request->getSession()->read('Auth.User')){ ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary nav">
             <!-- <?=$this->Html->image('you-free-logo.png', ['url'=>['controller' => 'Polls', 'action' => 'index'],'class'=>'logo']);?> -->
             <?=$this->Html->link('U | FREE?', ['controller' => 'Polls', 'action' => 'index'], ['class' => 'navbar-brand nav-title font-weight-bold']);?>
@@ -80,7 +79,7 @@ $description = 'Areufree';
                         <li class="nav-item">
                             <?php }?>
                             <?=$this->
-                            Html->link('Crear encuesta', ['controller' => 'Polls', 'action' => 'add'], ['class' => 'nav-link']);?>
+                            Html->link(__('Create Poll'), ['controller' => 'Polls', 'action' => 'add'], ['class' => 'nav-link']);?>
                         </li>
                         <?php if ($this->
                         request->getParam('controller') == 'Polls' && $this->request->getParam('action') == 'index') {?>
@@ -89,26 +88,45 @@ $description = 'Areufree';
                             <li class="nav-item">
                                 <?php }?>
                                 <?=$this->
-                                Html->link('Mis encuestas', ['controller' => 'Polls', 'action' => 'index'], ['class' => 'nav-link']);?>
+                                Html->link(__('My Polls'), ['controller' => 'Polls', 'action' => 'index'], ['class' => 'nav-link']);?>
                             </li>
                         </li>
                     </li>
                 </ul>
-                <div class="btn-group " role="group">
+                <div class="btn-group lang-group" role="group">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" id="btnGroupDrop1" type="button">
+                        <?= __("Language")?>
+                    </button>
+                    <div aria-labelledby="btnGroupDrop1" class="dropdown-menu dropdown-menu-right">
+                        <?=$this->Html->link(__("Spanish"), ['controller' => 'App', 'action' => 'changeLanguage', "es_ES"], ['class' => 'dropdown-item']);?>
+                        <?=$this->Html->link(__("English"), ['controller' => 'App', 'action' => 'changeLanguage', "en_GB"], ['class' => 'dropdown-item']);?>
+                    </div>
+                </div>
+                <div class="btn-group" role="group">
                     <button aria-expanded="false" aria-haspopup="true" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" id="btnGroupDrop1" type="button">
                         <?php echo $this->
                         request->getSession()->read('Auth.User.name') ?>
                     </button>
                     <div aria-labelledby="btnGroupDrop1" class="dropdown-menu dropdown-menu-right">
                     <?=$this->
-                        Html->link('Profile', ['controller' => 'Users', 'action' => 'edit'], ['class' => 'dropdown-item']);?>
+                        Html->link(__('Profile'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'dropdown-item']);?>
                         <?=$this->
-                        Html->link('Logout', ['controller' => 'Users', 'action' => 'logout'], ['class' => 'dropdown-item']);?>
+                        Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['class' => 'dropdown-item']);?>
                     </div>
                 </div>
             </div>
         </nav>
-        <?php }?>
+        <?php } else { ?>
+            <div class="btn-group login-lang" role="group">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" id="btnGroupDrop1" type="button">
+                        <?= __("Language")?>
+                    </button>
+                    <div aria-labelledby="btnGroupDrop1" class="dropdown-menu dropdown-menu-right login-lang">
+                        <?=$this->Html->link(__("Spanish"), ['controller' => 'App', 'action' => 'changeLanguage', "es_ES"], ['class' => 'dropdown-item']);?>
+                        <?=$this->Html->link(__("English"), ['controller' => 'App', 'action' => 'changeLanguage', "en_GB"], ['class' => 'dropdown-item']);?>
+                    </div>
+                </div>
+        <?php } ?>
         <?=$this->Flash->render()?>
         <?=$this->fetch('content')?>
         <!-- Here is the content injected -->

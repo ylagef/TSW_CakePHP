@@ -16,6 +16,16 @@ html, body {
     margin-right: 1rem;
 }
 
-.jumbotron{
-padding-bottom: 2rem;
+.jumbotron {
+    padding-bottom: 2rem;
+}
+
+.login-lang {
+    margin-top: 2rem;
+    float: right;
+    margin-right: 3rem;
+}
+
+.lang-group {
+    margin-right: 2rem;
 }

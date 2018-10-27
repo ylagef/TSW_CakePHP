@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\I18n\I18n;
 
 /**
  * Application Controller
@@ -27,6 +28,10 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+    public function beforeFilter(Event $event)
+    {
+         $this->Auth->allow('changeLanguage');
+    }
 
     /**
      * Initialization hook method.
@@ -57,4 +62,19 @@ class AppController extends Controller
         ]);
     }
 
+    
+
+    public function changeLanguage($lang='es_ES'){
+        I18n::setLocale($lang);
+        
+        $this->response = $this->response->withCookie('lang', [
+            'value' => $lang,
+            'path' => '/',
+            'httpOnly' => true,
+            'secure' => false,
+            'expire' => strtotime('+1 year')
+        ]);
+
+        return $this->redirect($this->request->referer());
+    }
 }

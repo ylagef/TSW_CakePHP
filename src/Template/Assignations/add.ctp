@@ -7,7 +7,7 @@ Html->script('scripts')?>
 <div class="jumbotron jumbotron-fluid rounded">
     <div class="container">
         <h1 class="display-4">
-            Participar en la encuesta
+            <?=__("Participate on poll")?>
         </h1>
         <p class="lead">
             <i class="material-icons lead-icon">
@@ -34,11 +34,9 @@ Html->script('scripts')?>
                     </i>
                 </span>
             </div>
-            <input aria-describedby="basic-addon1" aria-label="Username" class="form-control poll-link" disabled="" placeholder="localhost/view/<?=h($poll->url)?>" type="text">
+            <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>" disabled id="copyValue">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary " type="button" onclick="copy()" id="copyButton">
-                        COPIAR
-                    </button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copy()"><?=__("COPY")?></button>
                 </div>
             </input>
         </div>
@@ -125,7 +123,7 @@ Html->script('scripts')?>
 
             <div class="col-sm-10 accept-button">
                 <?=$this->
-                Form->button(__('Enviar'), ["class" => "btn btn-outline-secondary"]);?>
+                Form->button(__('Send'), ["class" => "btn btn-outline-secondary"]);?>
             </div>
             
         </div>

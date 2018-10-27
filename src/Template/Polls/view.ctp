@@ -3,7 +3,7 @@
 <!-- CENTRAL JUMBOTRON -->
 <div class="jumbotron jumbotron-fluid rounded">
     <div class="container">
-      <h1 class="display-4">Ver la encuesta</h1>
+      <h1 class="display-4"><?=__("View Poll")?></h1>
       <p class="lead"><i class="material-icons lead-icon">keyboard_arrow_right</i><?= h($poll->title) ?></p>
       
       <p class="lead"><?php
@@ -11,7 +11,7 @@
             echo "<i class='material-icons lead-icon'>place</i>";
             echo h($poll->place);
           } else {
-            echo "- Ubicación no especificada -";
+            echo "- ".__("Location not specified"." -");
           } 
         ?>
       </p>
@@ -24,10 +24,9 @@
             </i>
           </span>
         </div>
-        <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>"
-          aria-label="Username" aria-describedby="basic-addon1" disabled id="copyValue">
+        <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>" disabled id="copyValue">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" onclick="copy()">COPIAR</button>
+          <button class="btn btn-outline-secondary" type="button" onclick="copy()"><?=__("COPY")?></button>
         </div>
       </div>
 
@@ -35,11 +34,11 @@
         <table class="table text-center">
           <thead>
             <tr>
-              <th scope="col">Huecos</th>
+              <th scope="col"><?=__("Gaps")?></th>
               <?php foreach ($users as $user): ?>
                 <th scope="col"><?= h($user->name) ?></th>
               <?php endforeach; ?>
-              <th scope="col" class="font-weight-light">Total</th>
+              <th scope="col" class="font-weight-light"><?=__("Total")?></th>
             </tr>
           </thead>
           <tbody>
@@ -112,12 +111,12 @@
 
     <div class="other-option-button text-center">
       <?php if(!$participatedOnPoll){?>
-      <a ><?= $this->Html->link(__('Participar'), ['controller'=>'assignations','action' => 'add', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
+      <a ><?= $this->Html->link(__('Participate'), ['controller'=>'assignations','action' => 'add', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
       <?php }else{ ?>
-        <a ><?= $this->Html->link(__('Modificar participación'), ['controller'=>'assignations','action' => 'edit', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
+        <a ><?= $this->Html->link(__('Modify participation'), ['controller'=>'assignations','action' => 'edit', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
       <?php } ?>
       <?php if($this->request->getSession()->read('Auth.User.user_id')==$poll->author){ ?>
-        <a ><?= $this->Html->link(__('Editar encuesta'), ['controller'=>'polls','action' => 'edit', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
+        <a ><?= $this->Html->link(__('Edit poll'), ['controller'=>'polls','action' => 'edit', $poll->url],["class"=>"btn btn-outline-info"]) ?></a>
       <?php } ?>
     </div>
 </div>

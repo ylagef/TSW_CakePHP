@@ -1,0 +1,244 @@
+#  Login
+msgid "Log you in!"
+msgstr "Value"
+
+msgid "We just need two things"
+msgstr "Value"
+
+msgid "Username"
+msgstr "Value"
+
+msgid "Password"
+msgstr "Value"
+
+msgid "Fields are mandatory"
+msgstr "Value"
+
+msgid "Sign up"
+msgstr "Value"
+
+msgid "Login"
+msgstr "Value"
+
+# User edit
+msgid "Modify your data"
+msgstr "Value"
+
+msgid "Email"
+msgstr "Value"
+
+msgid "Username"
+msgstr "Value"
+
+msgid "Name"
+msgstr "Value"
+
+msgid "Password"
+msgstr "Value"
+
+msgid "Repeat password"
+msgstr "Value"
+
+msgid "Edit"
+msgstr "Value"
+
+# User add
+msgid "Sign up!"
+msgstr "Value"
+
+msgid "Tell me your data"
+msgstr "Value"
+
+msgid "Fields are mandatory"
+msgstr "Value"
+
+msgid "Return to login"
+msgstr "Value"
+
+msgid "Sign up"
+msgstr "Value"
+
+# Polls view
+msgid "View Poll"
+msgstr "Value"
+
+msgid "Location not specified"
+msgstr "Value"
+
+msgid "COPY"
+msgstr "Value"
+
+msgid "Gaps"
+msgstr "Value"
+
+msgid "Participate"
+msgstr "Value"
+
+msgid "Modify participation"
+msgstr "Value"
+
+msgid "Edit poll"
+msgstr "Value"
+
+# Polls index
+msgid "My Polls"
+msgstr "Value"
+
+msgid "Polls created by me"
+msgstr "Value"
+
+msgid "Polls where I participate on"
+msgstr "Value"
+
+msgid "View"
+msgstr "Value"
+
+# Polls edit
+msgid "Edit poll"
+msgstr "Value"
+
+msgid "Day"
+msgstr "Value"
+
+msgid "Start Hour"
+msgstr "Value"
+
+msgid "End Hour"
+msgstr "Value"
+
+msgid "Date"
+msgstr "Value"
+
+msgid "Add other option"
+msgstr "Value"
+
+msgid "Edit"
+msgstr "Value"
+
+# Polls add
+msgid "Create your poll"
+msgstr "Value"
+
+msgid "First, we need some things..."
+msgstr "Value"
+
+msgid "Why?"
+msgstr "Value"
+
+msgid "Reason"
+msgstr "Value"
+
+msgid "Where?"
+msgstr "Value"
+
+msgid "Location"
+msgstr "Value"
+
+msgid "Reason is mandatory"
+msgstr "Value"
+
+msgid "Continue"
+msgstr "Value"
+
+# Default layout
+msgid "Create Poll"
+msgstr "Value"
+
+msgid "My Polls"
+msgstr "Value"
+
+msgid "Language"
+msgstr "Value"
+
+msgid "Spanish"
+msgstr "Value"
+
+msgid "English"
+msgstr "Value"
+
+msgid "Profile"
+msgstr "Value"
+
+msgid "Logout"
+msgstr "Value"
+
+# Gaps add
+msgid "Create poll"
+msgstr "Value"
+
+msgid "Now, tell us the possible dates"
+msgstr "Value"
+
+# Assignations edit
+msgid "Edit participation"
+msgstr "Value"
+
+msgid "Location not specified"
+msgstr "Value"
+
+msgid "Edit"
+msgstr "Value"
+
+# Assignations add
+msgid "Participate on poll"
+msgstr "Value"
+
+msgid "Send"
+msgstr "Value"
+
+# Messages
+
+# Users
+msgid "The user has been saved."
+msgstr "Value"
+
+msgid "The user has been deleted."
+msgstr "Value"
+
+msgid "The user could not be saved. Please, try again."
+msgstr "Value"
+
+msgid "The user could not be deleted. Please, try again."
+msgstr "Value"
+
+msgid "Invalid username or password, try again."
+msgstr "Value"
+
+# Polls
+msgid "The poll has been saved."
+msgstr "Value"
+
+msgid "The poll has been deleted."
+msgstr "Value"
+
+msgid "The poll could not be saved. Please, try again."
+msgstr "Value"
+
+msgid "The poll could not be deleted. Please, try again."
+msgstr "Value"
+
+# Gaps
+msgid "The gap has been saved."
+msgstr "Value"
+
+msgid "The gap has been deleted."
+msgstr "Value"
+
+msgid "The gap could not be saved. Please, try again."
+msgstr "Value"
+
+msgid "The gap could not be deleted. Please, try again."
+msgstr "Value"
+
+# Assignations
+msgid "The assignation has been saved."
+msgstr "Value"
+
+msgid "The assignation has been deleted."
+msgstr "Value"
+
+msgid "The assignation could not be saved. Please, try again."
+msgstr "Value"
+
+msgid "The assignation could not be deleted. Please, try again."
+msgstr "Value"

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Cake\Event\Event;
 use App\Controller\AppController;
+use Cake\I18n\I18n;
 
 /**
  * Users Controller
@@ -17,6 +18,7 @@ class UsersController extends AppController
 
     public function beforeFilter(Event $event)
     {
+        I18n::setLocale($this->request->getCookie('lang'));
         parent::beforeFilter($event);
         $this->Auth->allow('add');
     }
