@@ -38,7 +38,7 @@ function loadValuesCheckboxes(gap_id, user_id){
                     </i>
                 </span>
             </div>
-            <input type="text" class="form-control poll-link" value="localhost/view/<?= h($poll->url) ?>" disabled id="copyValue">
+            <input type="text" class="form-control poll-link" value="localhost/polls/view/<?= h($poll->url) ?>" disabled id="copyValue">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" onclick="copy()"><?=__("COPY")?></button>
                 </div>

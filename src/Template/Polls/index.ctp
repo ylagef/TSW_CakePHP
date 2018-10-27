@@ -36,7 +36,7 @@
             <table class="table text-center">
               <thead>
                 <tr>
-                  <th scope="col"><?=__("Polls where I participate on")?></th>
+                  <th scope="col"><?=__("Polls in wich I participate")?></th>
                 </tr>
               </thead>
               <tbody>
