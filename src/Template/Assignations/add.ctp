@@ -46,20 +46,22 @@ Html->script('scripts')?>
                     <tr>
                         <th scope="col">
                         </th>
-                        <?php foreach ($users as $user): ?>
+                        <?php if($gaps->count()!=0){foreach ($users as $user): ?>
                             <th scope="col">
                                 <?=h($user->
                                 name)?>
                             </th>
-                        <?php endforeach;?>
+                        <?php endforeach;}?>
                         <th scope="col">
-                            <?=$this->
-                            request->getSession()->read('Auth.User.name')?>
+                            <?php if($gaps->count()!=0){echo $this->
+                            request->getSession()->read('Auth.User.name');}?>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($gaps as $gap): ?>
+                    <?php 
+                    if($gaps->count()!=0){
+                    foreach ($gaps as $gap): ?>
                         <tr>
                             <th scope="row">
                                 <p>
@@ -108,7 +110,11 @@ Html->script('scripts')?>
                                 </button>
                             </td>
                         </tr>
-                    <?php endforeach;?>
+                    <?php endforeach;
+                    } else {
+                    ?>
+                        <td><a class="lead"><?= __("There are not gaps yet.")?></a></td>
+                    <?php } ?>
                 </tbody>
             </table>
             
@@ -122,8 +128,12 @@ Html->script('scripts')?>
             <?php $input++; endforeach;?>
 
             <div class="col-sm-10 accept-button">
-                <?=$this->
-                Form->button(__('Send'), ["class" => "btn btn-outline-secondary"]);?>
+            <?php if($gaps->count()!=0){
+                echo $this->Form->button(__('Send'), ["class" => "btn btn-outline-secondary"]);
+            } else {
+                echo $this->Form->button(__('Back'), ["controller"=>"poll","action"=>"view",$poll->url,"class" => "btn btn-outline-secondary"]);
+            }
+                ?>
             </div>
             
         </div>

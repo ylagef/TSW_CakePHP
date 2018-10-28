@@ -38,7 +38,7 @@
               <?php foreach ($users as $user): ?>
                 <th scope="col"><?= h($user->name) ?></th>
               <?php endforeach; 
-               if($gaps->first()!=null){
+               if($gaps->count()!=0){
               ?>
               <th scope="col" class="font-weight-light"><?=__("Total")?></th>
                <?php } ?>
@@ -47,7 +47,7 @@
           <tbody>
           <?php 
             $maxGapCount=0;
-            if($gaps->first()!=null){
+            if($gaps->count()!=0){
               foreach ($gaps as $gap):
                 $gapCount=0;
               ?>

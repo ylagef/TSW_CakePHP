@@ -62,19 +62,30 @@
               <td>
                 <input class="form-control floating-label text-center date edit-disabled" id="date<?=$gap->gap_id?>" placeholder="<?=__("Date")?>" type="text"
                   value="<?php 
-                  $date=explode(', ', $gap->start_date)[0];
-                  $month=explode('/', $date)[0];
-                  $day=explode('/', $date)[1];
-                  $year=explode('/', $date)[2];
-
-                  echo $year."-".$month."-".$day;
-                  
+                  if($this->request->getCookie("lang")=="es_ES"){
+                    $date=explode(' ', $gap->start_date)[0];
+                    $month=explode('/', $date)[1];
+                    $day=explode('/', $date)[0];
+                    $year=explode('/', $date)[2];
+                    echo "20".$year."-".$month."-".$day;
+                  }else{
+                    $date=explode(', ', $gap->start_date)[0];
+                    $month=explode('/', $date)[1];
+                    $day=explode('/', $date)[0];
+                    $year=explode('/', $date)[2];
+                    echo $year."-".$month."-".$day;
+                  }
                   ?>" disabled>
               </td>
               <td>
                 <input class="form-control floating-label text-center startTime edit-disabled" id="startTime<?=$gap->gap_id?>" placeholder="<?=__("Start Hour")?>"
                   type="text"  value="<?php
+                  if($this->request->getCookie("lang")=="es_ES"){
+                    $time=explode(' ', $gap->start_date)[1];
+                  }else{
                    $time=explode(', ', $gap->start_date)[1];
+                  }
+
                    $aux=explode(' ',$time)[0];
                    $hour=explode(":",$aux)[0];
                    if(strpos($time,"PM")){
@@ -87,7 +98,12 @@
               <td>
                 <input class="form-control floating-label text-center endTime edit-disabled" id="endTime<?=$gap->gap_id?>" placeholder="<?=__("End Hour")?>" type="text"
                   value="<?php
+                  if($this->request->getCookie("lang")=="es_ES"){
+                    $time=explode(' ', $gap->end_date)[1];
+                  }else{
                    $time=explode(', ', $gap->end_date)[1];
+                  }
+
                    $aux=explode(' ',$time)[0];
                    $hour=explode(":",$aux)[0];
                    if(strpos($time,"PM")){

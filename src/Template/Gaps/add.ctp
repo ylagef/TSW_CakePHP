@@ -28,13 +28,13 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input class="form-control floating-label text-center date" id="date0" placeholder="<?=__("Date")?>" type="text" >
+                                <input class="form-control floating-label text-center date" id="date0" placeholder="<?=__("Date")?>" type="text" required>
                             </td>
                             <td>
-                                <input class="form-control floating-label text-center startTime" id="startTime0" placeholder="<?=__("Start hour")?>" type="text">
+                                <input class="form-control floating-label text-center startTime" id="startTime0" placeholder="<?=__("Start hour")?>" type="text" required>
                             </td>
                             <td>
-                                <input class="form-control floating-label text-center endTime" id="endTime0" placeholder="<?=__("End hour")?>" type="text">
+                                <input class="form-control floating-label text-center endTime" id="endTime0" placeholder="<?=__("End hour")?>" type="text" required>
                             </td>
                             <script> rows.push(0);</script>
                         </tr>

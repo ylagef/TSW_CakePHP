@@ -39,6 +39,7 @@ function datePicker(id) {
         format: 'HH:mm'
     });
 }
+
 var rowNum = rows[rows.length - 1] + 1;
 function addRow() {
     var x = document.getElementById('gapsTable').insertRow(rows.length + 1);
@@ -48,9 +49,9 @@ function addRow() {
     var c3 = x.insertCell(2);
     var c4 = x.insertCell(3);
 
-    c1.innerHTML = "<input class='form-control floating-label text-center date' id='date" + rowNum + "' placeholder='Fecha' type='text'>";
-    c2.innerHTML = "<input class='form-control floating-label text-center startTime' id='startTime" + rowNum + "' placeholder='Hora inicio' type='text'>";
-    c3.innerHTML = "<input class='form-control floating-label text-center endTime' id='endTime" + rowNum + "' placeholder='Hora fin' type='text'>";
+    c1.innerHTML = "<input class='form-control floating-label text-center date' id='date" + rowNum + "' placeholder='Fecha' type='text' required>";
+    c2.innerHTML = "<input class='form-control floating-label text-center startTime' id='startTime" + rowNum + "' placeholder='Hora inicio' type='text' required>";
+    c3.innerHTML = "<input class='form-control floating-label text-center endTime' id='endTime" + rowNum + "' placeholder='Hora fin' type='text' required>";
     c4.innerHTML = "<td><button class='btn btn-outline-danger btn-sm' onClick='deleteRow(" + rowNum + ")' type='button'><i class='material-icons'>delete</i></button></td>"
 
     datePicker(rowNum);

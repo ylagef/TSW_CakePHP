@@ -58,8 +58,8 @@ class PollsController extends AppController
          }
         $this->set('poll', $poll);
 
-         $id=$poll->poll_id;
-
+        $id = $poll->poll_id;
+        
         $this->loadModel('Gaps');
             $gaps = $this->Gaps->find()->where(['poll_id' => $id]); // Gaps of poll
         $this->set('gaps', $gaps);
@@ -134,11 +134,12 @@ class PollsController extends AppController
         $this->set('assignations', $assignations->toArray());
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $error=false;
+            $error="";
             $poll = $this->Polls->patchEntity($poll, $this->request->getData());
             
             $formGaps =  $this->request->getData();
-            
+            debug($poll);
+            debug($this->request->getData());
             if ($this->Polls->save($poll)) {
                 $alreadyOnDb=array();
                 $newGaps=array();
@@ -162,25 +163,37 @@ class PollsController extends AppController
                     if(!in_array($g, $alreadyOnDb)){
                         // Delete from db
                         if(!$this->Gaps->delete($g)){
-                            $error=true;
+                            $error="The gap could not be saved. Please, try again.";
+                            break;  
                         }
                     }
                 }
 
                 foreach($newGaps as $g){
                     // Insert all into db
-                     if(!$this->Gaps->save($g)){
-                            $error=true;
-                        }
+                    if($g->end_date <= $g->start_date){
+                        $error=__("End date has to be later than start date.");
+                        break;
+                    }
+                    
+                    if (!$this->Gaps->save($g)) {
+                        $error="The gap could not be saved. Please, try again.";
+                        break;
+                    }
                 }
 
-                if(!$error){
-                    $this->Flash->success(__('The poll and gaps has been saved.'));
-                    return $this->redirect(['action' => 'view', $url]);
-                }
+                
+            }else{
+                $error="The poll could not be saved. Please, try again.";
             }
 
-            $this->Flash->error(__('The poll could not be saved. Please, try again.'));
+            if($error==""){
+                    $this->Flash->success(__('The poll and gaps has been saved.'));
+                    return $this->redirect(['action' => 'view', $url]);
+            }else{
+                    $this->Flash->error($error);
+                    $this->set(compact('poll'));
+            }
         }
 
         $this->set(compact('poll'));
