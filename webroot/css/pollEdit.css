@@ -22,6 +22,10 @@ input {
     float: right;
 }
 
+.poll-link {
+    background-color: #e9ecef!important;
+}
+
 .link-icon {
     background-color: #6c757d;
     color: white;
