@@ -28,7 +28,7 @@
           </i>
         </span>
       </div>
-      <input type="text" class="form-control poll-link" value="localhost/polls/view/<?= h($poll->url) ?>" disabled id="copyValue">
+      <input type="text" class="form-control poll-link" value="<?=$_SERVER["HTTP_HOST"]?>/polls/view/<?= h($poll->url) ?>" disabled id="copyValue">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary " type="button" onclick="copy()" id="copyButton"><?=__("COPY")?></button>
       </div>

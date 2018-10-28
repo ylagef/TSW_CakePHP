@@ -135,24 +135,30 @@ class AssignationsController extends AppController
         $deleteAssignations = $this->Assignations->find()->where(['gap_id in' => $deletePollGaps]); // Assignated gaps of poll
 
         if ($this->request->is('post')) {
+            $error="";
             $assignations = $this->Assignations->newEntities($this->request->getData());
         
             foreach($deleteAssignations as $delete){
                 if($delete["user_id"]==$this->Auth->user('user_id')){
                     $assignationToDelete = $this->Assignations->get($delete["assignation_id"]);
                     if(!$this->Assignations->delete($assignationToDelete)){
-                        $this->Flash->error(__('Assignation could not be created. Please, try again.'));
+                        $error=__('Assignation could not be created. Please, try again.');
                     }
                 }
             }
 
             foreach ($assignations as $assignation){
                 if(!$this->Assignations->save($assignation)){
-                        $this->Flash->error(__('Assignation could not be created. Please, try again.'));
+                        $error=__('Assignation could not be created. Please, try again.');
                 }
             }
 
-            return $this->redirect(['controller'=>'Polls', 'action' => 'view', $poll->url]);
+            if($error!=""){
+                $this->Flash->error($error);
+            }else{
+                $this->Flash->success(__('The assignation has been saved.'));
+                return $this->redirect(['controller'=>'Polls', 'action' => 'view', $poll->url]);
+            }
         }
 
         $this->set(compact('assignation'));

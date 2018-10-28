@@ -113,6 +113,11 @@ class PollsController extends AppController
         $poll = $this->Polls->find()->where(['url' => $url])->first();
         $this->set('poll', $poll);
 
+        if($poll->author!=$this->Auth->user('user_id')){
+            $this->Flash->error("You are not authorized to do this.");
+            return $this->redirect(['action' => 'view', $url]);
+        }
+
          $id=$poll->poll_id;
 
         $this->loadModel('Gaps');
